@@ -173,13 +173,16 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.05);padding:
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 @media(max-width:768px){
-nav{padding:13px 18px}
-.hero{flex-direction:column;padding:90px 20px 50px;gap:40px;text-align:center}
+nav{padding:13px 16px}
+.soon-pill{padding:7px 12px;font-size:.75rem}
+.soon-pill span{white-space:nowrap}
+.nav-logo-text{font-size:1.1rem}
+.hero{flex-direction:column;padding:90px 20px 50px;gap:32px;text-align:center}
 .hero-sub{margin:0 auto 32px}
 .hero-btns{justify-content:center}
-.hero-right{order:-1}
-.phone-wrap{width:180px}
-.phone-frame{width:180px}
+.hero-right{order:1}
+.phone-wrap{width:200px}
+.phone-frame{width:200px}
 .feature-row{grid-template-columns:1fr}
 .feature-row.reverse{direction:ltr}
 .feat-info{padding:32px 28px}
@@ -374,7 +377,7 @@ footer{flex-direction:column;align-items:flex-start}
       <button class="plan-cta" data-tr="Yakında" data-en="Coming Soon">Yakında</button>
     </div>
     <div class="plan-card featured reveal">
-      <div class="plan-badge" data-tr="✦ En Popüler" data-en="✦ Most Popular">✦ En Popüler</div>
+      
       <div class="plan-name" data-tr="Full Plan" data-en="Full Plan">Full Plan</div>
       <p class="plan-desc" data-tr="Tüm özellikler, sınırsız kullanım." data-en="All features, unlimited use.">Tüm özellikler, sınırsız kullanım.</p>
       <div class="plan-price-box"><span class="plan-price" id="fullPrice">—</span><span class="plan-period" id="fullPeriod"></span></div>
@@ -387,7 +390,7 @@ footer{flex-direction:column;align-items:flex-start}
         <div class="plan-feat"><span class="plan-feat-icon">✓</span><span data-tr="Yapay Zeka Özeti" data-en="AI Summary">Yapay Zeka Özeti</span></div>
       </div>
       <button class="plan-cta" data-tr="Yakında" data-en="Coming Soon">Yakında</button>
-      <p class="plan-note" id="fullNote" data-tr="Yıllık abonelikte 2 ay bedava" data-en="2 months free on yearly plan">Yıllık abonelikte 2 ay bedava</p>
+      
     </div>
   </div>
 </section>
