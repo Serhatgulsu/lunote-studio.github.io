@@ -30,8 +30,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .lang-btn.active{background:var(--gold);color:#fff}
 .nav-cta{background:var(--ink);color:#fff;border:none;padding:9px 20px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;display:flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer}
 .pdot{width:5px;height:5px;background:var(--gold-l);border-radius:50%;animation:pulse 2s infinite}
-.hero{min-height:100vh;display:flex;align-items:center;padding:100px 40px 60px;gap:40px;max-width:1140px;margin:0 auto;flex-wrap:nowrap}
-.hero-left{flex:1;min-width:280px}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:space-between;padding:100px 40px 60px;gap:40px;max-width:1200px;margin:0 auto;flex-wrap:nowrap}
+.hero-left{flex:1;min-width:320px;max-width:560px}
 .hero-tag{display:inline-flex;align-items:center;gap:7px;background:var(--gp);border:1px solid rgba(201,144,42,.25);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:.73rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4.5vw,4rem);font-weight:700;line-height:1.06;letter-spacing:-.03em;color:var(--ink);margin-bottom:18px}
 .hero h1 em{font-style:italic;color:var(--gold)}
@@ -39,9 +39,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .hero-btns{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
 .btn-gold{background:var(--gold);color:#fff;border:none;padding:13px 26px;border-radius:26px;font-size:.9rem;font-weight:500;text-decoration:none;box-shadow:0 6px 20px rgba(201,144,42,.28);cursor:pointer;display:flex;align-items:center;gap:7px}
 .btn-ghost{border:1px solid rgba(201,144,42,.3);color:var(--gold);padding:12px 18px;border-radius:24px;font-size:.86rem;text-decoration:none}
-.badge-row{display:flex;gap:7px;flex-wrap:nowrap}
+.badge-row{display:flex;gap:7px;flex-wrap:wrap}
 .badge{background:var(--cream2);padding:4px 10px;border-radius:11px;font-size:.72rem;color:var(--muted)}
-.hero-devices{flex:0 0 auto;display:flex;justify-content:center}
+.hero-devices{flex:0 0 auto;display:flex;justify-content:center;align-items:center}
 .band{background:var(--cream2);padding:20px 40px;text-align:center}
 .band-inner{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;max-width:900px;margin:0 auto}
 .band-item{display:flex;align-items:center;gap:8px;font-size:.83rem;color:var(--muted)}
@@ -63,8 +63,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .feat-bullets li::before{content:'';width:5px;height:5px;min-width:5px;background:var(--gold);border-radius:50%;margin-top:7px}
 /* FRAME CONTAINERS */
 .feat-visual{background:var(--cream2);min-height:320px;display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden}
-.iphone-frame{width:150px;height:300px;background:#1C1C1E;border-radius:32px;padding:7px;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;flex-shrink:0}
-.iphone-screen{width:100%;height:100%;border-radius:26px;overflow:hidden;background:#f0f0f0;position:relative}
+.iphone-frame{width:148px;height:296px;background:#1C1C1E;border-radius:32px;padding:7px;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;flex-shrink:0}
+.iphone-screen{width:100%;height:100%;border-radius:22px;overflow:hidden;background:#f0f0f0;position:relative}
 .iphone-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:52px;height:10px;background:#0A0A0A;border-radius:5px;z-index:2}
 .iphone-btn-r{position:absolute;right:-3px;top:25%;width:3px;height:40px;background:#3A3A3C;border-radius:1.5px}
 .iphone-btn-l1{position:absolute;left:-3px;top:22%;width:3px;height:24px;background:#3A3A3C;border-radius:1.5px}
@@ -79,7 +79,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 /* Screenshot placeholders — replace src with actual image */
 .screen-img{width:100%;height:100%;object-fit:cover;object-position:top}
 /* Hero devices side by side */
-.devices-wrapper{display:flex;align-items:flex-end;gap:20px;animation:float 4s ease-in-out infinite}
+.devices-wrapper{display:flex;align-items:flex-end;gap:16px;animation:float 4s ease-in-out infinite}
 .platform-wrap{background:var(--cream2);padding:72px 40px}
 .platform-inner{max-width:1100px;margin:0 auto}
 .platform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:44px}
@@ -147,7 +147,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);padding:52px 40px 32px}
 
 <nav>
   <a href="#" class="nav-logo">
-    <img src="lunote-n15-1024x1024.png" style="width:32px;height:32px;border-radius:9px;"/>
+    <img src="lunote-n15-1024x1024.png" style="width:32px;height:32px;border-radius:9px;object-fit:cover;"/>
     <span class="nav-logo-text">LuNote</span>
   </a>
   <div class="nav-right">
