@@ -1,504 +1,511 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>LuNote</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LuNote — Smart Note-Taking App</title>
+<meta name="description" content="LuNote: AI-powered notes, voice transcription, calorie tracking, scientific calculator, document scanner. Available on iPhone, iPad and Apple Watch."/>
+<meta property="og:title" content="LuNote — Smart Note-Taking App"/>
+<meta property="og:description" content="AI notes, voice recorder, gender-aware calorie tracker, scientific calculator — all in one beautiful app."/>
+<meta property="og:image" content="https://smhnhzdlxcdpiqasmxka.supabase.co/storage/v1/object/public/public-assets/lunote-n15-1024x1024.png"/>
+<meta property="og:url" content="https://lunote.app"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" type="image/png" href="https://smhnhzdlxcdpiqasmxka.supabase.co/storage/v1/object/public/public-assets/lunote-n15-1024x1024.png"/>
+<link rel="apple-touch-icon" href="https://smhnhzdlxcdpiqasmxka.supabase.co/storage/v1/object/public/public-assets/lunote-n15-1024x1024.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--gold:#C9902A;--gold-light:#E8B84B;--gold-pale:rgba(201,144,42,0.1);--ink:#1A1710;--cream:#F7F3EC;--cream-dark:#EDE8DF;--muted:#8C8575;--white:#fff}
+:root{--gold:#C9902A;--gold-l:#E8B84B;--gp:rgba(201,144,42,.1);--ink:#1A1710;--cream:#FAF7F2;--cream2:#EDE8DF;--cream3:#F5EFE0;--muted:#8C8575;--white:#fff}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:rgba(247,243,236,0.93);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,144,42,0.12)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(250,247,242,.94);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,144,42,.12)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo img{width:34px;height:34px;border-radius:8px}
-.nav-logo-text{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--ink)}
+.nav-logo-icon{width:32px;height:32px;background:var(--gold);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink)}
 .nav-right{display:flex;align-items:center;gap:14px}
-.lang-toggle{display:flex;background:var(--cream-dark);border-radius:20px;padding:3px}
-.lang-btn{background:none;border:none;padding:5px 13px;border-radius:16px;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;cursor:pointer;color:var(--muted);transition:all .2s;letter-spacing:.05em}
+.lang-toggle{display:flex;background:var(--cream2);border-radius:20px;padding:3px}
+.lang-btn{background:none;border:none;padding:4px 13px;border-radius:16px;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:500;cursor:pointer;color:var(--muted);transition:all .2s}
 .lang-btn.active{background:var(--gold);color:#fff}
-.soon-pill{background:var(--ink);color:#fff;border:none;padding:8px 18px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;display:flex;align-items:center;gap:7px}
-.pulse-dot{width:6px;height:6px;background:var(--gold-light);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-.hero-wrap{max-width:1200px;margin:0 auto}
-.hero{min-height:100vh;display:flex;align-items:center;padding:100px 24px 60px;gap:60px}
-.hero-left{flex:1;min-width:0}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--gold-pale);border:1px solid rgba(201,144,42,0.25);color:var(--gold);padding:6px 14px;border-radius:20px;font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .7s ease both}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.8rem);font-weight:700;line-height:1.07;letter-spacing:-.03em;color:var(--ink);margin-bottom:22px;animation:fadeUp .7s .1s ease both}
+.nav-cta{background:var(--ink);color:#fff;border:none;padding:9px 20px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;display:flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer}
+.pdot{width:5px;height:5px;background:var(--gold-l);border-radius:50%;animation:pulse 2s infinite}
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 40px 60px;gap:40px;max-width:1140px;margin:0 auto;flex-wrap:wrap}
+.hero-left{flex:1;min-width:280px}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;background:var(--gp);border:1px solid rgba(201,144,42,.25);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:.73rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4.5vw,4rem);font-weight:700;line-height:1.06;letter-spacing:-.03em;color:var(--ink);margin-bottom:18px}
 .hero h1 em{font-style:italic;color:var(--gold)}
-.hero-sub{font-size:1.05rem;color:var(--muted);font-weight:300;line-height:1.7;max-width:440px;margin-bottom:40px;animation:fadeUp .7s .2s ease both}
-.hero-btns{display:flex;gap:14px;align-items:center;flex-wrap:wrap;animation:fadeUp .7s .3s ease both}
-.btn-gold{background:var(--gold);color:#fff;border:none;padding:14px 30px;border-radius:28px;font-family:'DM Sans',sans-serif;font-size:.92rem;font-weight:500;display:flex;align-items:center;gap:8px;box-shadow:0 6px 24px rgba(201,144,42,.3);cursor:default}
-.btn-ghost{color:var(--muted);font-size:.88rem;display:flex;align-items:center;gap:5px;cursor:default}
-.hero-right{flex:0 0 260px;display:flex;justify-content:center;animation:fadeUp .7s .4s ease both}
-.phone-wrap{position:relative;width:240px}
-.phone-frame{width:240px;background:#1a1a1a;border-radius:38px;padding:10px;box-shadow:0 30px 80px rgba(0,0,0,.25),0 0 0 1px rgba(255,255,255,.08);position:relative}
-.phone-screen{border-radius:30px;overflow:hidden;width:100%;aspect-ratio:9/19.5;position:relative;background:#f0f0f0}
-.phone-screen img{width:100%;height:100%;object-fit:cover;object-position:top}
-.phone-notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:80px;height:26px;background:#1a1a1a;border-radius:0 0 16px 16px;z-index:2}
-.phone-glow{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);width:160px;height:60px;background:rgba(201,144,42,.2);filter:blur(30px);border-radius:50%}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-.section{padding:90px 24px;max-width:1100px;margin:0 auto}
-.sec-label{text-align:center;font-size:.73rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-.sec-title{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;letter-spacing:-.025em;color:var(--ink);margin-bottom:60px}
-.features-list{display:flex;flex-direction:column;gap:20px}
-.feature-row{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(201,144,42,.12);border-radius:20px;overflow:hidden;background:var(--white)}
-.feature-row.reverse{direction:rtl}
-.feature-row.reverse>*{direction:ltr}
-.feat-info{padding:48px 44px;display:flex;flex-direction:column;justify-content:center}
-.feat-num{font-family:'Playfair Display',serif;font-size:.72rem;color:var(--gold);letter-spacing:.12em;margin-bottom:14px;display:block}
-.feat-title{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:700;color:var(--ink);margin-bottom:12px}
-.feat-desc{font-size:.9rem;color:var(--muted);line-height:1.65;font-weight:300}
-.feat-anim{background:var(--cream-dark);min-height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.anim-voice{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px}
-.waveform{display:flex;align-items:center;gap:3px;height:48px}
-.waveform span{display:block;width:4px;background:var(--gold);border-radius:2px;animation:wave 1.2s ease-in-out infinite}
-.waveform span:nth-child(1){animation-delay:0s;height:16px}
-.waveform span:nth-child(2){animation-delay:.1s;height:28px}
-.waveform span:nth-child(3){animation-delay:.2s;height:40px}
-.waveform span:nth-child(4){animation-delay:.3s;height:32px}
-.waveform span:nth-child(5){animation-delay:.4s;height:48px}
-.waveform span:nth-child(6){animation-delay:.5s;height:36px}
-.waveform span:nth-child(7){animation-delay:.6s;height:24px}
-.waveform span:nth-child(8){animation-delay:.7s;height:40px}
-.waveform span:nth-child(9){animation-delay:.8s;height:20px}
-@keyframes wave{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
-.transcript-lines{width:100%;display:flex;flex-direction:column;gap:7px}
-.tr-line{height:10px;background:var(--ink);border-radius:5px;opacity:0;animation:trReveal 3s infinite}
-.tr-line:nth-child(1){width:90%;animation-delay:.2s}
-.tr-line:nth-child(2){width:75%;animation-delay:.5s}
-.tr-line:nth-child(3){width:85%;animation-delay:.8s}
-.tr-line:nth-child(4){width:60%;animation-delay:1.1s}
-@keyframes trReveal{0%{opacity:0;transform:translateX(-8px)}20%,80%{opacity:.18;transform:translateX(0)}100%{opacity:0}}
-.rec-badge{background:rgba(220,50,50,.12);border:1px solid rgba(220,50,50,.3);color:#c03030;font-size:.72rem;font-weight:500;padding:4px 10px;border-radius:12px;display:flex;align-items:center;gap:5px;letter-spacing:.05em}
-.rec-dot{width:7px;height:7px;background:#c03030;border-radius:50%;animation:pulse 1s infinite}
-.anim-todo{padding:28px;display:flex;flex-direction:column;gap:10px;width:100%}
-.todo-item{background:#fff;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
-.todo-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--gold);flex-shrink:0;position:relative}
-.todo-check.done{background:var(--gold);border-color:var(--gold)}
-.todo-check.done::after{content:'';position:absolute;top:4px;left:6px;width:5px;height:9px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg)}
-.todo-text{font-size:.85rem;color:var(--ink);font-weight:400}
-.todo-text.done{text-decoration:line-through;color:var(--muted)}
-.anim-cal{padding:24px;width:100%}
-.cal-header{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:14px;text-align:center}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--muted);border-radius:8px}
-.cal-day.head{font-weight:500;color:var(--gold);font-size:.65rem}
-.cal-day.today{background:var(--gold);color:#fff;font-weight:700;animation:calPulse 2s infinite}
-.cal-day.event{background:rgba(201,144,42,.15);color:var(--ink);font-weight:500}
-@keyframes calPulse{0%,100%{box-shadow:0 0 0 0 rgba(201,144,42,.4)}70%{box-shadow:0 0 0 8px rgba(201,144,42,0)}}
-.cal-event-chip{margin-top:14px;background:rgba(201,144,42,.1);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:8px 12px;font-size:.75rem;color:var(--ink);animation:slideIn .6s .5s ease both}
-@keyframes slideIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
-.anim-scan{width:100%;height:260px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.scan-doc{width:140px;height:180px;background:#fff;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.12);position:relative;overflow:hidden;display:flex;flex-direction:column;padding:16px;gap:8px}
-.scan-doc-line{height:8px;border-radius:4px;background:var(--cream-dark)}
-.scan-doc-line:nth-child(2){width:80%}
-.scan-doc-line:nth-child(3){width:60%}
-.scan-doc-line:nth-child(4){width:90%}
-.scan-doc-line:nth-child(5){width:50%}
-.scan-beam{position:absolute;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,rgba(201,144,42,.8),transparent);animation:scanBeam 2s ease-in-out infinite;top:0}
-@keyframes scanBeam{0%{top:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%;opacity:0}}
-.scan-corner{position:absolute;width:20px;height:20px;border-color:var(--gold);border-style:solid;opacity:.7}
-.scan-corner.tl{top:8px;left:8px;border-width:2px 0 0 2px}
-.scan-corner.tr{top:8px;right:8px;border-width:2px 2px 0 0}
-.scan-corner.bl{bottom:8px;left:8px;border-width:0 0 2px 2px}
-.scan-corner.br{bottom:8px;right:8px;border-width:0 2px 2px 0}
-.anim-calc{padding:24px;width:100%;display:flex;flex-direction:column;align-items:center;gap:12px}
-.calc-display{background:var(--ink);border-radius:14px;width:100%;padding:16px 20px;text-align:right}
-.calc-expr{font-size:.75rem;color:rgba(255,255,255,.4);font-family:monospace;min-height:18px;transition:opacity .3s}
-.calc-result{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold-light);transition:opacity .3s}
-.calc-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%}
-.calc-key{background:#fff;border-radius:10px;padding:10px 0;text-align:center;font-size:.8rem;font-weight:500;color:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.06)}
-.calc-key.op{background:var(--gold-pale);color:var(--gold)}
-.calc-key.eq{background:var(--gold);color:#fff}
-.calc-key.fn{background:var(--cream-dark);font-size:.7rem;color:var(--muted)}
-.anim-epub{width:100%;height:100%;display:flex;align-items:center;justify-content:center;perspective:800px;padding:20px}
-.book-3d{position:relative;width:160px;height:200px;transform-style:preserve-3d;animation:bookFloat 4s ease-in-out infinite}
-@keyframes bookFloat{0%,100%{transform:rotateY(-20deg) rotateX(5deg)}50%{transform:rotateY(-30deg) rotateX(8deg)}}
-.book-3d-cover{position:absolute;width:160px;height:200px;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);border-radius:4px 12px 12px 4px;box-shadow:6px 6px 20px rgba(0,0,0,.4);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;padding:20px}
-.book-title-line{height:8px;background:rgba(201,144,42,.7);border-radius:4px}
-.book-title-line:nth-child(1){width:80%}
-.book-title-line:nth-child(2){width:60%}
-.book-title-line:nth-child(3){width:40%;background:rgba(201,144,42,.4)}
-.book-spine{position:absolute;left:-14px;width:14px;height:200px;background:linear-gradient(to right,#0a0a1a,#1a1a2e);border-radius:4px 0 0 4px;transform:rotateY(-90deg);transform-origin:right center}
-.book-pages{position:absolute;right:-8px;width:8px;height:196px;top:2px;background:repeating-linear-gradient(to bottom,#f0e6d0 0px,#f0e6d0 2px,#e8d8c0 2px,#e8d8c0 4px);border-radius:0 2px 2px 0}
-.page-turn{position:absolute;top:0;right:0;width:160px;height:200px;transform-origin:left center;animation:pageTurn 3s ease-in-out infinite}
-@keyframes pageTurn{0%,40%{transform:rotateY(0);opacity:1}50%{transform:rotateY(-90deg);opacity:.5}60%,100%{transform:rotateY(-180deg);opacity:0}}
-.page-content{position:absolute;inset:0;background:#faf6f0;border-radius:0 12px 12px 0;padding:16px;display:flex;flex-direction:column;gap:6px;backface-visibility:hidden}
-.page-line{height:7px;background:rgba(26,23,16,.08);border-radius:3px}
-.page-line:nth-child(1){width:95%}
-.page-line:nth-child(2){width:80%}
-.page-line:nth-child(3){width:90%}
-.page-line:nth-child(4){width:65%}
-.page-line:nth-child(5){width:85%}
-.page-line:nth-child(6){width:70%}
-.book-progress{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);width:120px}
-.book-progress-bar{height:3px;background:rgba(201,144,42,.15);border-radius:2px;overflow:hidden}
-.book-progress-fill{height:100%;background:var(--gold);border-radius:2px;animation:bookProgress 6s ease-in-out infinite}
-@keyframes bookProgress{0%{width:25%}50%{width:60%}100%{width:25%}}
-.book-page-num{text-align:center;font-size:.65rem;color:var(--muted);margin-top:6px;animation:pageNum 3s steps(1) infinite}
-@keyframes pageNum{0%{content:"42 / 318"}50%{content:"43 / 318"}}
-.philosophy{padding:100px 24px;background:var(--ink);color:#fff;text-align:center;position:relative;overflow:hidden}
-.philosophy::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 50%,rgba(201,144,42,.12) 0%,transparent 70%);pointer-events:none}
-.phil-inner{max-width:680px;margin:0 auto;position:relative}
-.quote-mark{font-family:'Playfair Display',serif;font-size:7rem;color:var(--gold);opacity:.18;line-height:.5;display:block;margin-bottom:28px}
-.philosophy h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,4vw,2.6rem);font-weight:400;font-style:italic;line-height:1.35;color:#fff;margin-bottom:28px}
-.philosophy h2 strong{font-style:normal;font-weight:700;color:var(--gold-light)}
-.philosophy p{font-size:.9rem;color:rgba(255,255,255,.4);letter-spacing:.04em}
-.pricing{padding:90px 24px;max-width:900px;margin:0 auto}
-.billing-toggle{display:flex;align-items:center;justify-content:center;gap:4px;background:var(--cream-dark);border-radius:24px;padding:4px;width:fit-content;margin:0 auto 40px;position:relative}
-.bill-btn{background:none;border:none;padding:9px 24px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;color:var(--muted);transition:all .25s}
-.bill-btn.active{background:var(--white);color:var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.08)}
-.bill-save-tag{background:var(--gold);color:#fff;font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:12px;letter-spacing:.04em;margin-left:4px;transition:opacity .25s}
-.bill-save-tag.hidden{opacity:0;pointer-events:none}
-.trial-badge{display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(201,144,42,.1);border:1px solid rgba(201,144,42,.25);color:var(--gold);padding:8px 20px;border-radius:20px;font-size:.82rem;font-weight:500;margin:0 auto 48px;width:fit-content}
-.plans{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.plan-card{border:1px solid rgba(201,144,42,.15);border-radius:22px;padding:36px 32px;background:var(--white);position:relative;transition:transform .25s,box-shadow .25s}
-.plan-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(201,144,42,.12)}
-.plan-card.featured{border-color:var(--gold);background:var(--ink);color:#fff}
-.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;font-size:.72rem;font-weight:500;padding:4px 14px;border-radius:12px;letter-spacing:.06em;white-space:nowrap}
-.plan-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:8px}
-.plan-card.featured .plan-name{color:#fff}
-.plan-desc{font-size:.85rem;color:var(--muted);margin-bottom:16px;line-height:1.5}
-.plan-card.featured .plan-desc{color:rgba(255,255,255,.5)}
-.plan-price-box{margin-bottom:20px;display:flex;align-items:baseline;gap:6px}
-.plan-price{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--ink);transition:opacity .3s}
-.plan-card.featured .plan-price{color:#fff}
-.plan-period{font-size:.82rem;color:var(--muted);font-weight:300}
-.plan-card.featured .plan-period{color:rgba(255,255,255,.5)}
-.plan-features{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
-.plan-feat{display:flex;align-items:flex-start;gap:10px;font-size:.85rem}
-.plan-feat-icon{color:var(--gold);font-size:1rem;flex-shrink:0;margin-top:1px}
-.plan-card.featured .plan-feat{color:rgba(255,255,255,.8)}
-.plan-cta{width:100%;padding:13px;border-radius:20px;border:none;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;cursor:default;background:var(--cream-dark);color:var(--muted)}
-.plan-card.featured .plan-cta{background:var(--gold);color:#fff}
-.plan-note{text-align:center;font-size:.78rem;color:var(--muted);margin-top:10px}
-.plan-card.featured .plan-note{color:rgba(255,255,255,.4)}
-footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.05);padding:36px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-.footer-logo{display:flex;align-items:center;gap:9px}
-.footer-logo img{width:26px;height:26px;border-radius:7px;opacity:.75}
-.footer-logo span{font-family:'Playfair Display',serif;font-size:1.05rem;color:rgba(255,255,255,.65)}
-.footer-copy{font-size:.78rem;color:rgba(255,255,255,.28)}
-
-.anim-ipad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:20px}
-.ipad-frame{position:relative;width:260px;height:190px;background:#1a1a1a;border-radius:16px;padding:8px;box-shadow:0 12px 40px rgba(0,0,0,.3)}
-.ipad-screen{width:100%;height:100%;background:#faf6f0;border-radius:10px;overflow:hidden;position:relative}
-.ipad-paper{width:100%;height:100%;position:relative;padding:8px}
-.ipad-lines{position:absolute;inset:0;padding:8px;display:flex;flex-direction:column;justify-content:space-around}
-.ipad-line{height:1px;background:rgba(201,144,42,.2);margin:0 4px}
-.handwriting-svg{position:absolute;top:0;left:0;width:100%;height:100%}
-.hw-path{stroke-dasharray:300;stroke-dashoffset:300;animation:drawPath 2s ease forwards}
-.hw-path-1{animation-delay:.2s}
-.hw-path-2{animation-delay:1s}
-.hw-path-3{animation-delay:1.8s}
-.hw-path-4{animation-delay:2.6s}
-@keyframes drawPath{to{stroke-dashoffset:0}}
-.pencil-cursor{position:absolute;width:8px;height:8px;background:var(--gold);border-radius:50%;animation:pencilMove 3s ease-in-out infinite;box-shadow:0 0 6px rgba(201,144,42,.6)}
-@keyframes pencilMove{0%{top:22%;left:8%}25%{top:22%;left:58%}26%{top:44%;left:8%}50%{top:44%;left:58%}51%{top:66%;left:8%}75%{top:66%;left:75%}76%{top:88%;left:8%}100%{top:88%;left:50%}}
-.ipad-home-bar{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:40px;height:3px;background:rgba(255,255,255,.3);border-radius:2px}
-.ipad-pencil{width:10px;height:170px;background:linear-gradient(to bottom,#f0f0f0,#e0e0e0,#c0c0c0);border-radius:5px 5px 2px 2px;box-shadow:2px 2px 8px rgba(0,0,0,.2);position:relative}
-.ipad-pencil::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:12px solid #c0c0c0}
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.hero-sub{font-size:.98rem;color:var(--muted);font-weight:300;line-height:1.75;max-width:420px;margin-bottom:30px}
+.hero-btns{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.btn-gold{background:var(--gold);color:#fff;border:none;padding:13px 26px;border-radius:26px;font-size:.9rem;font-weight:500;text-decoration:none;box-shadow:0 6px 20px rgba(201,144,42,.28);cursor:pointer;display:flex;align-items:center;gap:7px}
+.btn-ghost{border:1px solid rgba(201,144,42,.3);color:var(--gold);padding:12px 18px;border-radius:24px;font-size:.86rem;text-decoration:none}
+.badge-row{display:flex;gap:7px;flex-wrap:wrap}
+.badge{background:var(--cream2);padding:4px 10px;border-radius:11px;font-size:.72rem;color:var(--muted)}
+.hero-devices{flex:0 0 auto;display:flex;justify-content:center}
+.band{background:var(--cream2);padding:20px 40px;text-align:center}
+.band-inner{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;max-width:900px;margin:0 auto}
+.band-item{display:flex;align-items:center;gap:8px;font-size:.83rem;color:var(--muted)}
+.band-item strong{color:var(--ink);font-weight:500}
+.features-wrap{max-width:1100px;margin:0 auto;padding:80px 40px}
+.sec-label{text-align:center;font-size:.72rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.sec-title{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;letter-spacing:-.025em;color:var(--ink);margin-bottom:10px}
+.sec-title em{font-style:italic;color:var(--gold)}
+.sec-sub{text-align:center;color:var(--muted);font-size:.93rem;font-weight:300;line-height:1.65;max-width:480px;margin:0 auto 52px}
+.feat-row{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(201,144,42,.12);border-radius:20px;overflow:hidden;background:var(--white);margin-bottom:18px}
+.feat-row.rev{direction:rtl}
+.feat-row.rev>*{direction:ltr}
+.feat-info{padding:44px 42px;display:flex;flex-direction:column;justify-content:center}
+.feat-num{font-size:.7rem;color:var(--gold);letter-spacing:.12em;margin-bottom:12px;display:block}
+.feat-title{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:var(--ink);margin-bottom:10px}
+.feat-desc{font-size:.87rem;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.feat-bullets{list-style:none;display:flex;flex-direction:column;gap:6px}
+.feat-bullets li{font-size:.81rem;color:var(--muted);display:flex;align-items:flex-start;gap:7px}
+.feat-bullets li::before{content:'';width:5px;height:5px;min-width:5px;background:var(--gold);border-radius:50%;margin-top:7px}
+/* FRAME CONTAINERS */
+.feat-visual{background:var(--cream2);min-height:320px;display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden}
+.iphone-frame{width:160px;height:320px;background:#1C1C1E;border-radius:32px;padding:7px;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;flex-shrink:0}
+.iphone-screen{width:100%;height:100%;border-radius:26px;overflow:hidden;background:#f0f0f0;position:relative}
+.iphone-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:52px;height:10px;background:#0A0A0A;border-radius:5px;z-index:2}
+.iphone-btn-r{position:absolute;right:-3px;top:25%;width:3px;height:40px;background:#3A3A3C;border-radius:1.5px}
+.iphone-btn-l1{position:absolute;left:-3px;top:22%;width:3px;height:24px;background:#3A3A3C;border-radius:1.5px}
+.iphone-btn-l2{position:absolute;left:-3px;top:38%;width:3px;height:24px;background:#3A3A3C;border-radius:1.5px}
+.ipad-frame{width:280px;height:210px;background:#1C1C1E;border-radius:18px;padding:9px;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;flex-shrink:0}
+.ipad-screen{width:100%;height:100%;border-radius:10px;overflow:hidden;background:#f0f0f0;position:relative}
+.ipad-camera{position:absolute;top:4px;left:50%;transform:translateX(-50%);width:6px;height:6px;background:#0A0A0A;border-radius:50%;z-index:2}
+.ipad-btn-r{position:absolute;right:-3px;top:30%;width:3px;height:22px;background:#3A3A3C;border-radius:1.5px}
+.ipad-btn-r2{position:absolute;right:-3px;top:45%;width:3px;height:32px;background:#3A3A3C;border-radius:1.5px}
+.ipad-btn-r3{position:absolute;right:-3px;top:62%;width:3px;height:32px;background:#3A3A3C;border-radius:1.5px}
+.ipad-usbc{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:24px;height:4px;background:#3A3A3C;border-radius:2px}
+/* Screenshot placeholders — replace src with actual image */
+.screen-img{width:100%;height:100%;object-fit:cover;object-position:top}
+/* Hero devices side by side */
+.devices-wrapper{display:flex;align-items:flex-end;gap:20px;animation:float 4s ease-in-out infinite}
+.platform-wrap{background:var(--cream2);padding:72px 40px}
+.platform-inner{max-width:1100px;margin:0 auto}
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:44px}
+.platform-card{background:var(--white);border:1px solid rgba(201,144,42,.12);border-radius:18px;padding:26px 22px}
+.platform-emoji{font-size:2rem;margin-bottom:12px}
+.platform-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.platform-desc{font-size:.83rem;color:var(--muted);line-height:1.65;font-weight:300}
+.pricing-wrap{max-width:1100px;margin:0 auto;padding:80px 40px}
+.price-toggle-row{display:flex;justify-content:center;margin-bottom:34px}
+.ptoggle{display:flex;background:var(--cream2);border-radius:22px;padding:3px}
+.pt-btn{background:none;border:none;padding:7px 18px;border-radius:18px;font-size:.82rem;font-weight:500;cursor:pointer;color:var(--muted);transition:all .2s;font-family:'DM Sans',sans-serif}
+.pt-btn.on{background:var(--gold);color:#fff}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.price-card{background:var(--white);border:1px solid rgba(201,144,42,.15);border-radius:18px;padding:28px 24px}
+.price-card.feat{background:var(--gold);border-color:var(--gold)}
+.plan-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.plan-name.f{color:#fff}
+.plan-price{font-size:2.1rem;font-weight:700;color:var(--ink);line-height:1;margin:10px 0 3px}
+.plan-price.f{color:#fff}
+.plan-period{font-size:.79rem;color:var(--muted);margin-bottom:18px}
+.plan-period.f{color:rgba(255,255,255,.7)}
+.plan-feats{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
+.plan-feats li{font-size:.81rem;color:var(--muted);display:flex;align-items:center;gap:7px}
+.plan-feats li.f{color:rgba(255,255,255,.85)}
+.chk{width:14px;height:14px;min-width:14px;background:var(--gp);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;color:var(--gold)}
+.chk.f{background:rgba(255,255,255,.2);color:#fff}
+.chk.off{background:#f5f5f5;color:#ccc}
+.plan-btn{width:100%;padding:11px;border-radius:22px;font-size:.85rem;font-weight:500;border:1px solid rgba(201,144,42,.25);background:none;color:var(--gold);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.plan-btn:hover{background:var(--gold);color:#fff}
+.plan-btn.f{background:#fff;color:var(--gold);border-color:#fff}
+.region-note{text-align:center;font-size:.76rem;color:var(--muted);margin-top:14px;line-height:1.6}
+footer{background:var(--ink);color:rgba(255,255,255,.45);padding:52px 40px 32px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:flex;gap:48px;flex-wrap:wrap;margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-brand{flex:1;min-width:200px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:8px}
+.footer-tagline{font-size:.83rem;line-height:1.65;font-weight:300}
+.footer-col{display:flex;flex-direction:column;gap:8px}
+.footer-col-title{font-size:.8rem;font-weight:500;color:rgba(255,255,255,.7);margin-bottom:4px}
+.footer-col a{color:rgba(255,255,255,.45);text-decoration:none;font-size:.82rem}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.77rem}
+.footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none}
+.footer-bottom a:hover{color:var(--gold)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-@media(max-width:768px){
-nav{padding:13px 16px}
-.soon-pill{padding:7px 12px;font-size:.75rem}
-.soon-pill span{white-space:nowrap}
-.nav-logo-text{font-size:1.1rem}
-.hero{flex-direction:column;padding:90px 20px 50px;gap:32px;text-align:center}
-.hero-sub{margin:0 auto 32px}
-.hero-btns{justify-content:center}
-.hero-right{order:1}
-.phone-wrap{width:200px}
-.phone-frame{width:200px}
-.feature-row{grid-template-columns:1fr}
-.feature-row.reverse{direction:ltr}
-.feat-info{padding:32px 28px}
-.feat-anim{min-height:200px}
-.plans{grid-template-columns:1fr}
-footer{flex-direction:column;align-items:flex-start}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media(max-width:720px){
+  nav{padding:12px 20px}
+  .hero{padding:80px 20px 40px;flex-direction:column}
+  .feat-row,.feat-row.rev{grid-template-columns:1fr;direction:ltr}
+  .feat-info{padding:28px 20px}
+  .features-wrap,.pricing-wrap{padding:56px 20px}
+  .platform-wrap{padding:56px 20px}
+  footer{padding:40px 20px 24px}
+  .devices-wrapper{gap:10px}
+  .ipad-frame{width:200px;height:150px}
+  .iphone-frame{width:120px;height:240px}
 }
 </style>
 </head>
 <body>
+
 <nav>
-  <a class="nav-logo" href="#">
-    <img src="lunote-n15-1024x1024.png" alt="LuNote"/>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">L</div>
     <span class="nav-logo-text">LuNote</span>
   </a>
   <div class="nav-right">
     <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('tr')">TR</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn" onclick="setLang('tr',this)">TR</button>
     </div>
-    <div class="soon-pill">
-      <div class="pulse-dot"></div>
-      <span data-tr="Yakında · App Store" data-en="Soon · App Store">Yakında · App Store</span>
-    </div>
+    <a href="#pricing" class="nav-cta">
+      <span class="pdot"></span>
+      <span data-en="Download Free" data-tr="Ücretsiz İndir">Download Free</span>
+    </a>
   </div>
 </nav>
 
-<div class="hero-wrap">
-<section class="hero">
+<!-- HERO -->
+<div style="background:var(--cream)">
+<div class="hero">
   <div class="hero-left">
-    <div class="hero-tag"><div class="pulse-dot"></div><span data-tr="iOS için geliyor" data-en="Coming to iOS">iOS için geliyor</span></div>
-    <h1 data-tr="Düşüncen için<br><em>özgür bir alan.</em>" data-en="A <em>free space</em><br>for your mind.">Düşüncen için<br><em>özgür bir alan.</em></h1>
-    <p class="hero-sub" data-tr="Not al, planla, kaydet, oku. Hepsi bir arada — tam sana göre." data-en="Take notes, plan, record, read. All in one — built around you.">Not al, planla, kaydet, oku. Hepsi bir arada — tam sana göre.</p>
+    <div class="hero-tag">
+      <span class="pdot"></span>
+      <span data-en="iPhone · iPad · Apple Watch" data-tr="iPhone · iPad · Apple Watch">iPhone · iPad · Apple Watch</span>
+    </div>
+    <h1><span data-en="Think smarter,<br><em>live healthier</em>,<br>stay organized." data-tr="Daha akıllı düşün,<br><em>sağlıklı yaşa</em>,<br>organize kal.">Think smarter,<br><em>live healthier</em>,<br>stay organized.</span></h1>
+    <p class="hero-sub" data-en="AI-powered notes, voice transcription, calorie tracking with gender-based goals, scientific calculator, document scanner — all in one warm, beautiful app." data-tr="Yapay zeka notları, ses transkripsiyonu, cinsiyet bazlı kalori takibi, bilimsel hesap makinesi, belge tarayıcı — hepsi tek güzel uygulamada.">AI-powered notes, voice transcription, calorie tracking with gender-based goals, scientific calculator, document scanner — all in one warm, beautiful app.</p>
     <div class="hero-btns">
-      <div class="btn-gold"><div class="pulse-dot"></div><span data-tr="App Store'da Yakında" data-en="Coming to App Store">App Store'da Yakında</span></div>
-      <div class="btn-ghost"><span data-tr="7 gün ücretsiz dene" data-en="7-day free trial">7 gün ücretsiz dene</span></div>
+      <a href="#" class="btn-gold" data-en="3-Day Free Trial" data-tr="3 Günlük Ücretsiz Deneme">3-Day Free Trial</a>
+      <a href="#features" class="btn-ghost" data-en="See features →" data-tr="Özelliklere bak →">See features →</a>
+    </div>
+    <div class="badge-row">
+      <span class="badge" data-en="No credit card" data-tr="Kredi kartı yok">No credit card</span>
+      <span class="badge" data-en="All features unlocked" data-tr="Tüm özellikler açık">All features unlocked</span>
+      <span class="badge">iOS 16+</span>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="phone-wrap">
-      <div class="phone-frame">
-        <div class="phone-notch"></div>
-        <div class="phone-screen"><img src="IMG_2178.png" alt="LuNote App"/></div>
+
+  <!-- FRAME 1 & 2: iPad + iPhone hero -->
+  <div class="hero-devices">
+    <div class="devices-wrapper">
+
+      <!-- FRAME 1: iPad Pro — 3-panel Notes view -->
+      <div class="ipad-frame">
+        <div class="ipad-camera"></div>
+        <div class="ipad-screen">
+          <!-- REPLACE: src="screenshots/01-ipad-home.png" -->
+          <img class="screen-img" src="screenshots/01-ipad-home.png" alt="LuNote iPad" onerror="this.style.background='#EDE8DF';this.style.display='block'"/>
+        </div>
+        <div class="ipad-btn-r"></div>
+        <div class="ipad-btn-r2"></div>
+        <div class="ipad-btn-r3"></div>
+        <div class="ipad-usbc"></div>
       </div>
-      <div class="phone-glow"></div>
+
+      <!-- FRAME 2: iPhone 17 Pro — Home screen -->
+      <div class="iphone-frame">
+        <div class="iphone-island"></div>
+        <div class="iphone-screen">
+          <!-- REPLACE: src="screenshots/02-iphone-home.png" -->
+          <img class="screen-img" src="screenshots/02-iphone-home.png" alt="LuNote iPhone" onerror="this.style.background='#EDE8DF';this.style.display='block'"/>
+        </div>
+        <div class="iphone-btn-r"></div>
+        <div class="iphone-btn-l1"></div>
+        <div class="iphone-btn-l2"></div>
+      </div>
+
     </div>
   </div>
-</section>
+</div>
 </div>
 
-<section class="section">
-  <p class="sec-label" data-tr="Özellikler" data-en="Features">Özellikler</p>
-  <h2 class="sec-title" data-tr="Her şey, tek bir yerde." data-en="Everything, in one place.">Her şey, tek bir yerde.</h2>
-  <div class="features-list">
-
-    <div class="feature-row reveal">
-      <div class="feat-info">
-        <span class="feat-num">01</span>
-        <div class="feat-title" data-tr="Ses Kaydedici" data-en="Voice Recorder">Ses Kaydedici</div>
-        <p class="feat-desc" data-tr="Toplantıları kaydet, yapay zeka ile transkript al ve toplantı notuna dönüştür. Türkçe ve İngilizce." data-en="Record meetings, get AI transcripts, convert to meeting notes. Turkish and English.">Toplantıları kaydet, yapay zeka ile transkript al ve toplantı notuna dönüştür. Türkçe ve İngilizce.</p>
-      </div>
-      <div class="feat-anim">
-        <div class="anim-voice">
-          <div class="rec-badge"><div class="rec-dot"></div><span data-tr="KAYIT" data-en="REC">KAYIT</span></div>
-          <div class="waveform"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-          <div class="transcript-lines"><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="feature-row reveal">
-      <div class="feat-info">
-        <span class="feat-num">02</span>
-        <div class="feat-title" data-tr="Not Defteri" data-en="Notebook">Not Defteri</div>
-        <p class="feat-desc" data-tr="Apple Pencil ile kağıt üzerinde yazar gibi not al. Çizgili, kareli veya noktalı sayfa. Tam özgürlük." data-en="Write notes as if on paper with Apple Pencil. Lined, grid or dotted pages. Total freedom.">Apple Pencil ile kağıt üzerinde yazar gibi not al. Çizgili, kareli veya noktalı sayfa. Tam özgürlük.</p>
-      </div>
-      <div class="feat-anim">
-        <div class="anim-ipad">
-          <div class="ipad-frame">
-            <div class="ipad-screen">
-              <div class="ipad-paper">
-                <div class="ipad-lines">
-                  <div class="ipad-line"></div><div class="ipad-line"></div><div class="ipad-line"></div>
-                  <div class="ipad-line"></div><div class="ipad-line"></div><div class="ipad-line"></div>
-                  <div class="ipad-line"></div><div class="ipad-line"></div>
-                </div>
-                <svg class="handwriting-svg" viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg">
-                  <path class="hw-path hw-path-1" d="M20,30 Q35,20 50,32 Q65,44 80,28" fill="none" stroke="#1A1710" stroke-width="2" stroke-linecap="round"/>
-                  <path class="hw-path hw-path-2" d="M20,55 Q40,48 60,56 Q80,64 100,52 Q120,40 140,54" fill="none" stroke="#1A1710" stroke-width="2" stroke-linecap="round"/>
-                  <path class="hw-path hw-path-3" d="M20,80 Q50,72 80,80 Q110,88 140,76 Q160,68 180,78" fill="none" stroke="#1A1710" stroke-width="2" stroke-linecap="round"/>
-                  <path class="hw-path hw-path-4" d="M20,105 Q45,98 70,106 Q95,114 120,102" fill="none" stroke="#1A1710" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <div class="pencil-cursor"></div>
-              </div>
-            </div>
-            <div class="ipad-home-bar"></div>
-          </div>
-          <div class="ipad-pencil"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="feature-row reverse reveal">
-      <div class="feat-info">
-        <span class="feat-num">03</span>
-        <div class="feat-title" data-tr="Görev Yönetimi" data-en="Task Manager">Görev Yönetimi</div>
-        <p class="feat-desc" data-tr="Gruplar, öncelikler, son tarihler. Gerçekten çalışan bildirimler." data-en="Groups, priorities, deadlines. Notifications that actually work.">Gruplar, öncelikler, son tarihler. Gerçekten çalışan bildirimler.</p>
-      </div>
-      <div class="feat-anim">
-        <div class="anim-todo">
-          <div class="todo-item"><div class="todo-check done"></div><span class="todo-text done" data-tr="Raporu tamamla" data-en="Finish report">Raporu tamamla</span></div>
-          <div class="todo-item"><div class="todo-check done"></div><span class="todo-text done" data-tr="Toplantı notları" data-en="Meeting notes">Toplantı notları</span></div>
-          <div class="todo-item"><div class="todo-check"></div><span class="todo-text" data-tr="Kitap: 20 sayfa" data-en="Book: 20 pages">Kitap: 20 sayfa</span></div>
-          <div class="todo-item"><div class="todo-check"></div><span class="todo-text" data-tr="Haftalık plan" data-en="Weekly plan">Haftalık plan</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="feature-row reveal">
-      <div class="feat-info">
-        <span class="feat-num">04</span>
-        <div class="feat-title" data-tr="Akıllı Takvim" data-en="Smart Calendar">Akıllı Takvim</div>
-        <p class="feat-desc" data-tr="iPhone Takvim ile senkron, kişiselleştirilebilir alan." data-en="Syncs with iPhone Calendar, fully customizable.">iPhone Takvim ile senkron, kişiselleştirilebilir alan.</p>
-      </div>
-      <div class="feat-anim">
-        <div class="anim-cal" style="padding:28px">
-          <div class="cal-header">Haziran 2026</div>
-          <div class="cal-grid">
-            <div class="cal-day head">Pt</div><div class="cal-day head">Sa</div><div class="cal-day head">Ça</div><div class="cal-day head">Pe</div><div class="cal-day head">Cu</div><div class="cal-day head">Ct</div><div class="cal-day head">Pz</div>
-            <div class="cal-day">1</div><div class="cal-day today">2</div><div class="cal-day event">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div>
-            <div class="cal-day">8</div><div class="cal-day event">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day event">12</div><div class="cal-day">13</div><div class="cal-day">14</div>
-            <div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day event">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div>
-          </div>
-          <div class="cal-event-chip" data-tr="🟠 Bugün · 3 etkinlik" data-en="🟠 Today · 3 events">🟠 Bugün · 3 etkinlik</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="feature-row reverse reveal">
-      <div class="feat-info">
-        <span class="feat-num">05</span>
-        <div class="feat-title" data-tr="Belge Tarayıcı" data-en="Document Scanner">Belge Tarayıcı</div>
-        <p class="feat-desc" data-tr="Belgeni tara, PDF'e dönüştür, notlarının yanında sakla." data-en="Scan documents, convert to PDF, store alongside your notes.">Belgeni tara, PDF'e dönüştür, notlarının yanında sakla.</p>
-      </div>
-      <div class="feat-anim">
-        <div class="anim-scan">
-          <div class="scan-doc">
-            <div class="scan-corner tl"></div><div class="scan-corner tr"></div><div class="scan-corner bl"></div><div class="scan-corner br"></div>
-            <div class="scan-doc-line"></div><div class="scan-doc-line"></div><div class="scan-doc-line"></div><div class="scan-doc-line"></div>
-            <div class="scan-beam"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="feature-row reveal">
-      <div class="feat-info">
-        <span class="feat-num">06</span>
-        <div class="feat-title" data-tr="Bilimsel Hesap Makinesi" data-en="Scientific Calculator">Bilimsel Hesap Makinesi</div>
-        <p class="feat-desc" data-tr="Temel işlemlerden ileri matematiğe. Geçmişi kaydet, notlarına kopyala." data-en="From basics to advanced math. Save history, copy to notes.">Temel işlemlerden ileri matematiğe. Geçmişi kaydet, notlarına kopyala.</p>
-      </div>
-      <div class="feat-anim">
-        <div class="anim-calc">
-          <div class="calc-display">
-            <div class="calc-expr" id="calcExpr">sin(π/4) =</div>
-            <div class="calc-result" id="calcResult">0.7071</div>
-          </div>
-          <div class="calc-keys">
-            <div class="calc-key fn">sin</div><div class="calc-key fn">cos</div><div class="calc-key fn">tan</div><div class="calc-key op">÷</div>
-            <div class="calc-key">7</div><div class="calc-key">8</div><div class="calc-key">9</div><div class="calc-key op">×</div>
-            <div class="calc-key">4</div><div class="calc-key">5</div><div class="calc-key">6</div><div class="calc-key op">−</div>
-            <div class="calc-key">1</div><div class="calc-key">2</div><div class="calc-key">3</div><div class="calc-key eq">=</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="feature-row reverse reveal">
-      <div class="feat-info">
-        <span class="feat-num">07</span>
-        <div class="feat-title" data-tr="Kitaplık" data-en="Library">Kitaplık</div>
-        <p class="feat-desc" data-tr="EPUB ve PDF okuyucu. İçe aktar, not al, okuma istatistiklerini takip et." data-en="EPUB and PDF reader. Import, annotate, track reading stats.">EPUB ve PDF okuyucu. İçe aktar, not al, okuma istatistiklerini takip et.</p>
-      </div>
-      <div class="feat-anim">
-        <div class="anim-epub">
-          <div class="book-3d">
-            <div class="book-spine"></div>
-            <div class="book-pages"></div>
-            <div class="book-3d-cover">
-              <div class="book-title-line"></div>
-              <div class="book-title-line"></div>
-              <div class="book-title-line"></div>
-            </div>
-            <div class="page-turn">
-              <div class="page-content">
-                <div class="page-line"></div><div class="page-line"></div><div class="page-line"></div>
-                <div class="page-line"></div><div class="page-line"></div><div class="page-line"></div>
-              </div>
-            </div>
-          </div>
-          <div class="book-progress">
-            <div class="book-progress-bar"><div class="book-progress-fill"></div></div>
-            <div class="book-page-num">43 / 318</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+<!-- BAND -->
+<div class="band">
+  <div class="band-inner">
+    <div class="band-item"><span style="font-size:1.1rem">✍️</span> <strong data-en="AI Notes" data-tr="AI Notlar">AI Notes</strong></div>
+    <div class="band-item"><span style="font-size:1.1rem">🎙️</span> <strong data-en="Voice Recorder" data-tr="Ses Kaydedici">Voice Recorder</strong></div>
+    <div class="band-item"><span style="font-size:1.1rem">🍽️</span> <strong data-en="Calorie AI" data-tr="Kalori AI">Calorie AI</strong></div>
+    <div class="band-item"><span style="font-size:1.1rem">🧮</span> <strong data-en="Sci Calculator" data-tr="Bilimsel Hesap">Sci Calculator</strong></div>
+    <div class="band-item"><span style="font-size:1.1rem">📷</span> <strong data-en="Doc Scanner" data-tr="Belge Tarayıcı">Doc Scanner</strong></div>
+    <div class="band-item"><span style="font-size:1.1rem">📖</span> <strong data-en="Library" data-tr="Kütüphane">Library</strong></div>
   </div>
-</section>
+</div>
 
-<section class="philosophy reveal">
-  <div class="phil-inner">
-    <span class="quote-mark">"</span>
-    <h2 data-tr="Bir araç değil, <strong>alışkanlık.</strong><br>Her gün açmak istediğin uygulama." data-en="Not a tool, a <strong>habit.</strong><br>An app you want to open every day.">Bir araç değil, <strong>alışkanlık.</strong><br>Her gün açmak istediğin uygulama.</h2>
-    <p data-tr="LuNote Studio tarafından sevgiyle yapıldı." data-en="Made with love by LuNote Studio.">LuNote Studio tarafından sevgiyle yapıldı.</p>
-  </div>
-</section>
+<!-- FEATURES -->
+<div class="features-wrap" id="features">
+  <p class="sec-label" data-en="Everything you need" data-tr="İhtiyacınız olan her şey">Everything you need</p>
+  <h2 class="sec-title" data-en="Packed with <em>powerful</em> features" data-tr="<em>Güçlü</em> özelliklerle dolu">Packed with <em>powerful</em> features</h2>
+  <p class="sec-sub" data-en="From smart notes to health tracking — LuNote does it all, beautifully." data-tr="Akıllı notlardan sağlık takibine — LuNote hepsini güzelce yapar.">From smart notes to health tracking — LuNote does it all, beautifully.</p>
 
-<section class="pricing">
-  <p class="sec-label" data-tr="Planlar" data-en="Plans">Planlar</p>
-  <h2 class="sec-title" data-tr="Sana uygun planı seç." data-en="Pick the plan for you.">Sana uygun planı seç.</h2>
-  <div class="billing-toggle">
-    <button class="bill-btn active" id="billMonthly" onclick="setBilling('monthly')" data-tr="Aylık" data-en="Monthly">Aylık</button>
-    <button class="bill-btn" id="billYearly" onclick="setBilling('yearly')" data-tr="Yıllık" data-en="Yearly">Yıllık</button>
-    <div class="bill-save-tag hidden" id="billSaveTag" data-tr="2 ay bedava" data-en="2 months free">2 ay bedava</div>
-  </div>
-  <div class="trial-badge">✦ <span data-tr="7 gün ücretsiz dene — kredi kartı gerekmez" data-en="7-day free trial — no credit card required">7 gün ücretsiz dene — kredi kartı gerekmez</span></div>
-  <div class="plans">
-    <div class="plan-card reveal">
-      <div class="plan-name" data-tr="Ajanda Plan" data-en="Agenda Plan">Ajanda Plan</div>
-      <p class="plan-desc" data-tr="Günlük takip ve temel ihtiyaçlar için ideal." data-en="Ideal for daily tracking and core needs.">Günlük takip ve temel ihtiyaçlar için ideal.</p>
-      <div class="plan-price-box"><span class="plan-price" id="agendaPrice">—</span><span class="plan-period" id="agendaPeriod"></span></div>
-      <div class="plan-features">
-        <div class="plan-feat"><span class="plan-feat-icon">✓</span><span data-tr="Not Defteri" data-en="Notebook">Not Defteri</span></div>
-        <div class="plan-feat"><span class="plan-feat-icon">✓</span><span data-tr="Akıllı Takvim" data-en="Smart Calendar">Akıllı Takvim</span></div>
-        <div class="plan-feat"><span class="plan-feat-icon">✓</span><span data-tr="Görev Yönetimi" data-en="Task Manager">Görev Yönetimi</span></div>
-        <div class="plan-feat"><span class="plan-feat-icon">✓</span><span data-tr="Bilimsel Hesap Makinesi" data-en="Scientific Calculator">Bilimsel Hesap Makinesi</span></div>
-      </div>
-      <button class="plan-cta" data-tr="Yakında" data-en="Coming Soon">Yakında</button>
+  <!-- FEAT 01 — NOTES -->
+  <div class="feat-row reveal">
+    <div class="feat-info">
+      <span class="feat-num" data-en="01 — Smart Notes" data-tr="01 — Akıllı Notlar">01 — Smart Notes</span>
+      <h3 class="feat-title" data-en="Notes that think<br>with you." data-tr="Sizinle düşünen<br>notlar.">Notes that think<br>with you.</h3>
+      <p class="feat-desc" data-en="AI improves, summarizes and continues your notes. Apple Pencil support, customizable canvas colors and paper lines — ruled, grid, dots or blank." data-tr="AI notlarınızı geliştirir, özetler ve devam ettirir. Apple Pencil, özelleştirilebilir tuval renkleri ve kağıt çizgileri.">AI improves, summarizes and continues your notes. Apple Pencil support, customizable canvas colors and paper lines — ruled, grid, dots or blank.</p>
+      <ul class="feat-bullets">
+        <li data-en="AI improve, summarize & continue" data-tr="AI ile geliştir, özetle ve devam et">AI improve, summarize & continue</li>
+        <li data-en="Apple Pencil + drawing canvas" data-tr="Apple Pencil + çizim tuvali">Apple Pencil + drawing canvas</li>
+        <li data-en="Canvas colors: cream, white, dark, blue" data-tr="Tuval rengi: krem, beyaz, koyu, mavi">Canvas colors: cream, white, dark, blue</li>
+        <li data-en="Paper: ruled, grid, dots, blank" data-tr="Kağıt: çizgili, kareli, noktalı, düz">Paper: ruled, grid, dots, blank</li>
+      </ul>
     </div>
-    <div class="plan-card featured reveal">
-      
-      <div class="plan-name" data-tr="Full Plan" data-en="Full Plan">Full Plan</div>
-      <p class="plan-desc" data-tr="Tüm özellikler, sınırsız kullanım." data-en="All features, unlimited use.">Tüm özellikler, sınırsız kullanım.</p>
-      <div class="plan-price-box"><span class="plan-price" id="fullPrice">—</span><span class="plan-period" id="fullPeriod"></span></div>
-      <div class="plan-features">
-        <div class="plan-feat"><span class="plan-feat-icon">✓</span><span data-tr="Ajanda Plan'ın her şeyi" data-en="Everything in Agenda Plan">Ajanda Plan'ın her şeyi</span></div>
-        <div class="plan-feat"><span class="plan-feat-icon">✓</span><span data-tr="Ses Kaydedici + Transkript" data-en="Voice Recorder + Transcript">Ses Kaydedici + Transkript</span></div>
-        <div class="plan-feat"><span class="plan-feat-icon">✓</span><span data-tr="Kitaplık (EPUB & PDF)" data-en="Library (EPUB & PDF)">Kitaplık (EPUB & PDF)</span></div>
-        <div class="plan-feat"><span class="plan-feat-icon">✓</span><span data-tr="Tarayıcı" data-en="Browser">Tarayıcı</span></div>
-        <div class="plan-feat"><span class="plan-feat-icon">✓</span><span data-tr="Belge Tarayıcı" data-en="Document Scanner">Belge Tarayıcı</span></div>
-        <div class="plan-feat"><span class="plan-feat-icon">✓</span><span data-tr="Yapay Zeka Özeti" data-en="AI Summary">Yapay Zeka Özeti</span></div>
+    <!-- FRAME 3: iPhone Notes editor -->
+    <div class="feat-visual">
+      <div class="iphone-frame">
+        <div class="iphone-island"></div>
+        <div class="iphone-screen">
+          <img class="screen-img" src="screenshots/03-iphone-notes.png" alt="Notes" onerror="this.style.background='#EDE8DF'"/>
+        </div>
+        <div class="iphone-btn-r"></div>
+        <div class="iphone-btn-l1"></div>
+        <div class="iphone-btn-l2"></div>
       </div>
-      <button class="plan-cta" data-tr="Yakında" data-en="Coming Soon">Yakında</button>
-      
     </div>
   </div>
-</section>
+
+  <!-- FEAT 02 — VOICE -->
+  <div class="feat-row rev reveal">
+    <div class="feat-info">
+      <span class="feat-num" data-en="02 — Voice Recorder" data-tr="02 — Ses Kaydedici">02 — Voice Recorder</span>
+      <h3 class="feat-title" data-en="Record meetings.<br>AI summarizes live." data-tr="Toplantıları kaydet.<br>AI canlı özetler.">Record meetings.<br>AI summarizes live.</h3>
+      <p class="feat-desc" data-en="Live summary panel slides open alongside your notes. Real-time speech recognition + GPT-4 summary every 15 seconds. Name your recording, save to notes." data-tr="Canlı özet paneli notlarınızın yanında açılır. Gerçek zamanlı tanıma + her 15 saniyede GPT-4 özet.">Live summary panel slides open alongside your notes. Real-time speech recognition + GPT-4 summary every 15 seconds. Name your recording, save to notes.</p>
+      <ul class="feat-bullets">
+        <li data-en="Real-time transcript" data-tr="Gerçek zamanlı transkript">Real-time transcript</li>
+        <li data-en="GPT-4 summary every 15 sec" data-tr="Her 15 saniyede GPT-4 özet">GPT-4 summary every 15 sec</li>
+        <li data-en="Name recordings, save to notes" data-tr="Kayıtları adlandır, notlara kaydet">Name recordings, save to notes</li>
+        <li data-en="Auto language detection" data-tr="Otomatik dil algılama">Auto language detection</li>
+      </ul>
+    </div>
+    <!-- FRAME 4: iPhone Voice recorder -->
+    <div class="feat-visual">
+      <div class="iphone-frame">
+        <div class="iphone-island"></div>
+        <div class="iphone-screen">
+          <img class="screen-img" src="screenshots/04-iphone-voice.png" alt="Voice" onerror="this.style.background='#EDE8DF'"/>
+        </div>
+        <div class="iphone-btn-r"></div>
+        <div class="iphone-btn-l1"></div>
+        <div class="iphone-btn-l2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEAT 03 — CALORIE -->
+  <div class="feat-row reveal">
+    <div class="feat-info">
+      <span class="feat-num" data-en="03 — Calorie Tracker" data-tr="03 — Kalori Takibi">03 — Calorie Tracker</span>
+      <h3 class="feat-title" data-en="Photo to calories.<br>Gender-aware goals." data-tr="Fotoğraftan kalori.<br>Cinsiyet bazlı hedefler.">Photo to calories.<br>Gender-aware goals.</h3>
+      <p class="feat-desc" data-en="Set age, gender, weight, height — Harris-Benedict calculates your personal daily goal. Take a photo, GPT-4 Vision estimates calories, protein, carbs and fat." data-tr="Yaş, cinsiyet, kilo, boy girin — Harris-Benedict kişisel hedefinizi hesaplar. Fotoğraf çekin, GPT-4 Vision kalori hesaplar.">Set age, gender, weight, height — Harris-Benedict calculates your personal daily goal. Take a photo, GPT-4 Vision estimates calories, protein, carbs and fat.</p>
+      <ul class="feat-bullets">
+        <li data-en="Gender-based TDEE: ♂ and ♀ different goals" data-tr="Cinsiyet bazlı TDEE: erkek ve kadın farklı">Gender-based TDEE: ♂ and ♀ different goals</li>
+        <li data-en="Photo → AI identifies every ingredient" data-tr="Fotoğraf → AI her malzemeyi tanır">Photo → AI identifies every ingredient</li>
+        <li data-en="Breakfast · Lunch · Snack · Dinner" data-tr="Kahvaltı · Öğle · Ara · Akşam">Breakfast · Lunch · Snack · Dinner</li>
+        <li data-en="Daily history with progress bars" data-tr="İlerleme çubuklu günlük geçmiş">Daily history with progress bars</li>
+      </ul>
+    </div>
+    <!-- FRAME 5: iPhone Calorie tracker -->
+    <div class="feat-visual">
+      <div class="iphone-frame">
+        <div class="iphone-island"></div>
+        <div class="iphone-screen">
+          <img class="screen-img" src="screenshots/05-iphone-calorie.png" alt="Calorie" onerror="this.style.background='#EDE8DF'"/>
+        </div>
+        <div class="iphone-btn-r"></div>
+        <div class="iphone-btn-l1"></div>
+        <div class="iphone-btn-l2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEAT 04 — CALCULATOR -->
+  <div class="feat-row rev reveal">
+    <div class="feat-info">
+      <span class="feat-num" data-en="04 — Scientific Calculator" data-tr="04 — Bilimsel Hesap Makinesi">04 — Scientific Calculator</span>
+      <h3 class="feat-title" data-en="Edit any step.<br>Camera solves problems." data-tr="Her adımı düzenle.<br>Kamera çözer.">Edit any step.<br>Camera solves problems.</h3>
+      <p class="feat-desc" data-en="Made a mistake? Tap any step in history and correct it — no need to restart. Point your camera at a math problem and AI solves it instantly." data-tr="Hata mı yaptınız? Geçmişte herhangi bir adıma dokunup düzeltin. Kameranızı bir probleme çevirin — AI anında çözer.">Made a mistake? Tap any step in history and correct it — no need to restart. Point your camera at a math problem and AI solves it instantly.</p>
+      <ul class="feat-bullets">
+        <li data-en="Full scientific: sin, cos, log, √, π..." data-tr="Tam bilimsel: sin, cos, log, √, π...">Full scientific: sin, cos, log, √, π...</li>
+        <li data-en="Editable history — tap to fix any step" data-tr="Düzenlenebilir geçmiş — adıma dokun">Editable history — tap to fix any step</li>
+        <li data-en="Camera mode: photo → AI solves" data-tr="Kamera modu: fotoğraf → AI çözer">Camera mode: photo → AI solves</li>
+        <li data-en="Full Plan feature" data-tr="Full Plan özelliği">Full Plan feature</li>
+      </ul>
+    </div>
+    <!-- FRAME 6: iPhone Calculator -->
+    <div class="feat-visual">
+      <div class="iphone-frame">
+        <div class="iphone-island"></div>
+        <div class="iphone-screen">
+          <img class="screen-img" src="screenshots/06-iphone-calculator.png" alt="Calculator" onerror="this.style.background='#EDE8DF'"/>
+        </div>
+        <div class="iphone-btn-r"></div>
+        <div class="iphone-btn-l1"></div>
+        <div class="iphone-btn-l2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEAT 05 — TASKS -->
+  <div class="feat-row reveal">
+    <div class="feat-info">
+      <span class="feat-num" data-en="05 — Tasks & Calendar" data-tr="05 — Görevler & Takvim">05 — Tasks & Calendar</span>
+      <h3 class="feat-title" data-en="Three themes.<br>Smart reminders." data-tr="Üç tema.<br>Akıllı hatırlatmalar.">Three themes.<br>Smart reminders.</h3>
+      <p class="feat-desc" data-en="Card, Timeline or Minimal. Morning digest only if you have tasks that day. Apple Calendar sync. Configurable reminders: 15, 30 or 60 minutes." data-tr="Kart, Zaman Çizelgesi veya Minimal. Sabah özeti sadece görev varsa. Apple Takvim senkronizasyonu.">Card, Timeline or Minimal. Morning digest only if you have tasks that day. Apple Calendar sync. Configurable reminders: 15, 30 or 60 minutes.</p>
+      <ul class="feat-bullets">
+        <li data-en="3 themes: Card, Timeline, Minimal" data-tr="3 tema: Kart, Zaman Çizelgesi, Minimal">3 themes: Card, Timeline, Minimal</li>
+        <li data-en="Priority: high, medium, low" data-tr="Öncelik: yüksek, orta, düşük">Priority: high, medium, low</li>
+        <li data-en="Morning digest — only when needed" data-tr="Sabah özeti — sadece gerektiğinde">Morning digest — only when needed</li>
+        <li data-en="Apple Calendar sync" data-tr="Apple Takvim senkronizasyonu">Apple Calendar sync</li>
+      </ul>
+    </div>
+    <!-- FRAME 7: iPhone Tasks -->
+    <div class="feat-visual">
+      <div class="iphone-frame">
+        <div class="iphone-island"></div>
+        <div class="iphone-screen">
+          <img class="screen-img" src="screenshots/07-iphone-tasks.png" alt="Tasks" onerror="this.style.background='#EDE8DF'"/>
+        </div>
+        <div class="iphone-btn-r"></div>
+        <div class="iphone-btn-l1"></div>
+        <div class="iphone-btn-l2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEAT 06 — LIBRARY + SCANNER -->
+  <div class="feat-row rev reveal">
+    <div class="feat-info">
+      <span class="feat-num" data-en="06 — Library + Scanner" data-tr="06 — Kütüphane + Tarayıcı">06 — Library + Scanner</span>
+      <h3 class="feat-title" data-en="Every format.<br>Color or B&amp;W scan." data-tr="Her format.<br>Renkli veya siyah-beyaz.">Every format.<br>Color or B&amp;W scan.</h3>
+      <p class="feat-desc" data-en="PDF, EPUB, Word, PowerPoint, Pages. Share from WhatsApp or any app directly to LuNote. AI summarizes any document. Scanner with OCR, color and B&amp;W output." data-tr="PDF, EPUB, Word, PowerPoint, Pages. WhatsApp'tan veya herhangi bir uygulamadan LuNote'a paylaşın. AI herhangi bir belgeyi özetler.">PDF, EPUB, Word, PowerPoint, Pages. Share from WhatsApp or any app directly to LuNote. AI summarizes any document. Scanner with OCR, color and B&amp;W output.</p>
+      <ul class="feat-bullets">
+        <li data-en="AI document summary in seconds" data-tr="Saniyeler içinde AI belge özeti">AI document summary in seconds</li>
+        <li data-en="Share from any app → LuNote" data-tr="Herhangi bir uygulamadan → LuNote">Share from any app → LuNote</li>
+        <li data-en="Scanner: color / B&amp;W + OCR" data-tr="Tarayıcı: renkli / S&B + OCR">Scanner: color / B&amp;W + OCR</li>
+        <li data-en="Backup: iCloud Drive or Google Drive" data-tr="Yedekleme: iCloud Drive veya Google Drive">Backup: iCloud Drive or Google Drive</li>
+      </ul>
+    </div>
+    <!-- FRAME 8: iPhone Library -->
+    <div class="feat-visual">
+      <div class="iphone-frame">
+        <div class="iphone-island"></div>
+        <div class="iphone-screen">
+          <img class="screen-img" src="screenshots/08-iphone-library.png" alt="Library" onerror="this.style.background='#EDE8DF'"/>
+        </div>
+        <div class="iphone-btn-r"></div>
+        <div class="iphone-btn-l1"></div>
+        <div class="iphone-btn-l2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PLATFORMS -->
+<div class="platform-wrap" id="platforms">
+  <div class="platform-inner">
+    <p class="sec-label" data-en="Works everywhere" data-tr="Her yerde çalışır">Works everywhere</p>
+    <h2 class="sec-title" data-en="iPhone, iPad, <em>and</em> Apple Watch." data-tr="iPhone, iPad <em>ve</em> Apple Watch.">iPhone, iPad, <em>and</em> Apple Watch.</h2>
+    <p class="sec-sub" data-en="One subscription, all your devices. Widgets on your home screen too." data-tr="Tek abonelik, tüm cihazlarınız. Ana ekran widget'ları da dahil.">One subscription, all your devices. Widgets on your home screen too.</p>
+    <div class="platform-grid reveal">
+      <div class="platform-card"><div class="platform-emoji">📱</div><div class="platform-name">iPhone</div><p class="platform-desc" data-en="Full experience. All AI features, calorie tracker, voice recorder, scientific calculator — on your iPhone." data-tr="Tam deneyim. Tüm AI özellikleri, kalori takibi, ses kaydedici, hesap makinesi.">Full experience. All AI features, calorie tracker, voice recorder, scientific calculator — on your iPhone.</p></div>
+      <div class="platform-card"><div class="platform-emoji">🖥️</div><div class="platform-name">iPad</div><p class="platform-desc" data-en="Glass Ultra 3-panel layout. Apple Pencil drawing. Split-view live summary panel." data-tr="Glass Ultra 3-panel düzeni. Apple Pencil çizimi. Bölünmüş görünüm canlı özet.">Glass Ultra 3-panel layout. Apple Pencil drawing. Split-view live summary panel.</p></div>
+      <div class="platform-card"><div class="platform-emoji">⌚</div><div class="platform-name">Apple Watch</div><p class="platform-desc" data-en="Quick access to tasks from your wrist. Glanceable complication for your watch face." data-tr="Bileğinizden görevlere hızlı erişim. Saat kadranı komplikasyonu.">Quick access to tasks from your wrist. Glanceable complication for your watch face.</p></div>
+      <div class="platform-card"><div class="platform-emoji">🔲</div><div class="platform-name" data-en="Widgets" data-tr="Widget'lar">Widgets</div><p class="platform-desc" data-en="Home screen and lock screen widgets for tasks, notes and calorie ring." data-tr="Görevler, notlar ve kalori halkası için widget'lar.">Home screen and lock screen widgets for tasks, notes and calorie ring.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-wrap" id="pricing">
+  <p class="sec-label" data-en="Simple pricing" data-tr="Basit fiyatlandırma">Simple pricing</p>
+  <h2 class="sec-title" data-en="Start free. <em>Stay forever</em>." data-tr="Ücretsiz başla. <em>Sonsuza kal</em>.">Start free. <em>Stay forever</em>.</h2>
+  <p class="sec-sub" data-en="3 days free — no credit card, all features unlocked. Then choose your plan." data-tr="3 gün ücretsiz — kredi kartı yok, tüm özellikler açık. Sonra planınızı seçin.">3 days free — no credit card, all features unlocked. Then choose your plan.</p>
+  <div class="price-toggle-row">
+    <div class="ptoggle">
+      <button class="pt-btn on" onclick="setPrice('m',this)" data-en="Monthly" data-tr="Aylık">Monthly</button>
+      <button class="pt-btn" onclick="setPrice('y',this)" data-en="Yearly — 2 months free" data-tr="Yıllık — 2 ay ücretsiz">Yearly — 2 months free</button>
+    </div>
+  </div>
+  <div class="price-grid reveal">
+    <div class="price-card">
+      <div class="plan-name" data-en="Free Trial" data-tr="Ücretsiz Deneme">Free Trial</div>
+      <div class="plan-price">$0</div>
+      <div class="plan-period" data-en="3 days · No card" data-tr="3 gün · Kart yok">3 days · No card</div>
+      <ul class="plan-feats">
+        <li><div class="chk">✓</div><span data-en="All features unlocked" data-tr="Tüm özellikler açık">All features unlocked</span></li>
+        <li><div class="chk">✓</div><span data-en="No account required" data-tr="Hesap gerekmez">No account required</span></li>
+      </ul>
+      <button class="plan-btn" data-en="Get Started" data-tr="Başlayın">Get Started</button>
+    </div>
+    <div class="price-card">
+      <div class="plan-name" data-en="Agenda" data-tr="Ajanda">Agenda</div>
+      <div class="plan-price" id="ap">₺49.99</div>
+      <div class="plan-period" id="app" data-en="/ month · 7-day trial" data-tr="/ ay · 7 günlük deneme">/ month · 7-day trial</div>
+      <ul class="plan-feats">
+        <li><div class="chk">✓</div><span data-en="3 notes · 3 documents" data-tr="3 not · 3 belge">3 notes · 3 documents</span></li>
+        <li><div class="chk">✓</div><span data-en="Tasks & Calendar" data-tr="Görevler ve Takvim">Tasks & Calendar</span></li>
+        <li><div class="chk off">—</div><span style="color:#ccc" data-en="AI features locked" data-tr="AI kilitli">AI features locked</span></li>
+      </ul>
+      <button class="plan-btn" data-en="Choose Agenda" data-tr="Ajanda Seç">Choose Agenda</button>
+    </div>
+    <div class="price-card feat">
+      <div style="background:rgba(255,255,255,.2);color:#fff;font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:8px" data-en="Most Popular" data-tr="En Popüler">Most Popular</div>
+      <div class="plan-name f" data-en="Full Plan" data-tr="Full Plan">Full Plan</div>
+      <div class="plan-price f" id="fp">₺79.99</div>
+      <div class="plan-period f" id="fpp" data-en="/ month · 7-day trial" data-tr="/ ay · 7 günlük deneme">/ month · 7-day trial</div>
+      <ul class="plan-feats">
+        <li class="f"><div class="chk f">✓</div><span data-en="Unlimited notes & documents" data-tr="Sınırsız not ve belge">Unlimited notes & documents</span></li>
+        <li class="f"><div class="chk f">✓</div><span data-en="AI writing assistant" data-tr="AI yazma asistanı">AI writing assistant</span></li>
+        <li class="f"><div class="chk f">✓</div><span data-en="Voice recorder + transcript" data-tr="Ses kaydedici + transkript">Voice recorder + transcript</span></li>
+        <li class="f"><div class="chk f">✓</div><span data-en="Calorie tracker (gender-aware)" data-tr="Kalori takibi (cinsiyet bazlı)">Calorie tracker (gender-aware)</span></li>
+        <li class="f"><div class="chk f">✓</div><span data-en="Scientific calculator + camera" data-tr="Bilimsel hesap makinesi + kamera">Scientific calculator + camera</span></li>
+        <li class="f"><div class="chk f">✓</div><span data-en="Scanner · Library · All themes" data-tr="Tarayıcı · Kütüphane · Tüm temalar">Scanner · Library · All themes</span></li>
+      </ul>
+      <button class="plan-btn f" data-en="Choose Full Plan" data-tr="Full Plan Seç">Choose Full Plan</button>
+    </div>
+  </div>
+  <p class="region-note" data-en="Prices in Turkish Lira (₺) · Vary by region · Annual: Agenda ₺499/yr · Full ₺799.99/yr" data-tr="Fiyatlar Türk Lirası (₺) · Bölgeye göre değişir · Yıllık: Ajanda ₺499 · Full ₺799.99">Prices in Turkish Lira (₺) · Vary by region · Annual: Agenda ₺499/yr · Full ₺799.99/yr</p>
+</div>
 
 <footer>
-  <div class="footer-logo">
-    <img src="lunote-n15-1024x1024.png" alt="LuNote"/>
-    <span>LuNote</span>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">LuNote</div>
+        <p class="footer-tagline" data-en="Smart note-taking for iPhone, iPad & Apple Watch. AI-powered. Built with care." data-tr="iPhone, iPad ve Apple Watch için akıllı not alma. AI destekli.">Smart note-taking for iPhone, iPad & Apple Watch. AI-powered. Built with care.</p>
+        <div style="margin-top:16px"><a href="mailto:support@lunote.app" style="color:var(--gold);text-decoration:none;font-size:.83rem">support@lunote.app</a></div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" data-en="App" data-tr="Uygulama">App</div>
+        <a href="#features" data-en="Features" data-tr="Özellikler">Features</a>
+        <a href="#pricing" data-en="Pricing" data-tr="Fiyatlar">Pricing</a>
+        <a href="#platforms" data-en="Platforms" data-tr="Platformlar">Platforms</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" data-en="Legal" data-tr="Yasal">Legal</div>
+        <a href="privacy.html" data-en="Privacy Policy" data-tr="Gizlilik Politikası">Privacy Policy</a>
+        <a href="terms.html" data-en="Terms of Use" data-tr="Kullanım Koşulları">Terms of Use</a>
+        <a href="mailto:support@lunote.app" data-en="Contact" data-tr="İletişim">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 LuNote Studio. <span data-en="All rights reserved." data-tr="Tüm hakları saklıdır.">All rights reserved.</span></span>
+      <div style="display:flex;gap:16px">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="mailto:support@lunote.app">support@lunote.app</a>
+      </div>
+    </div>
   </div>
-  <p class="footer-copy" data-tr="© 2026 LuNote Studio. Tüm hakları saklıdır." data-en="© 2026 LuNote Studio. All rights reserved.">© 2026 LuNote Studio. Tüm hakları saklıdır.</p>
 </footer>
 
 <script>
-const PRICES={TR:{symbol:'₺',agenda:{monthly:49.99,yearly:499.99},full:{monthly:79.99,yearly:799.99},periodMonth:'/ay',periodYear:'/yıl'},USD:{symbol:'$',agenda:{monthly:4.99,yearly:49.99},full:{monthly:7.99,yearly:79.99},periodMonth:'/mo',periodYear:'/yr'},EUR:{symbol:'€',agenda:{monthly:4.99,yearly:49.99},full:{monthly:7.99,yearly:79.99},periodMonth:'/Mo',periodYear:'/Jahr'}};
-const EU=['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
-let region='USD',billing='monthly',lang='tr';
-async function detectRegion(){try{const r=await fetch('https://ipapi.co/json/');const d=await r.json();const cc=d.country_code||'';if(cc==='TR')region='TR';else if(EU.includes(cc))region='EUR';else region='USD';}catch(e){region='USD';}updatePrices();}
-function fmt(amount,r){const p=PRICES[r];if(r==='TR')return amount.toLocaleString('tr-TR',{minimumFractionDigits:2})+' '+p.symbol;if(r==='EUR')return p.symbol+amount.toFixed(2).replace('.',',');return p.symbol+amount.toFixed(2);}
-function updatePrices(){const p=PRICES[region];const yearly=billing==='yearly';const aa=yearly?p.agenda.yearly:p.agenda.monthly;const fa=yearly?p.full.yearly:p.full.monthly;const per=yearly?p.periodYear:p.periodMonth;const ap=document.getElementById('agendaPrice');const fp=document.getElementById('fullPrice');if(ap){ap.style.opacity='0';setTimeout(()=>{ap.textContent=fmt(aa,region);ap.style.opacity='1';},200);}if(fp){fp.style.opacity='0';setTimeout(()=>{fp.textContent=fmt(fa,region);fp.style.opacity='1';},200);}document.getElementById('agendaPeriod').textContent=per;document.getElementById('fullPeriod').textContent=per;const fn=document.getElementById('fullNote');if(fn)fn.style.display=yearly?'block':'none';const st=document.getElementById('billSaveTag');if(st)st.classList.toggle('hidden',!yearly);}
-function setBilling(t){billing=t;document.getElementById('billMonthly').classList.toggle('active',t==='monthly');document.getElementById('billYearly').classList.toggle('active',t==='yearly');updatePrices();}
-function setLang(l){lang=l;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent===l.toUpperCase()));document.querySelectorAll('[data-tr]').forEach(el=>{const t=el.getAttribute('data-'+l);if(t)el.innerHTML=t;});document.documentElement.lang=l;updatePrices();}
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-const calcData=[{expr:'sin(π/4) =',res:'0.7071'},{expr:'√144 =',res:'12'},{expr:'3.14159 × r²',res:'78.54'},{expr:'log₁₀(1000) =',res:'3'}];
-let ci=0;
-setInterval(()=>{ci=(ci+1)%calcData.length;const e=document.getElementById('calcExpr');const r=document.getElementById('calcResult');if(e&&r){e.style.opacity='0';r.style.opacity='0';setTimeout(()=>{e.textContent=calcData[ci].expr;r.textContent=calcData[ci].res;e.style.opacity='1';r.style.opacity='1';},300);}},2800);
-function animateTodos(){document.querySelectorAll('.todo-item').forEach((item,i)=>{item.style.opacity='0';item.style.transform='translateY(10px)';setTimeout(()=>{item.style.transition='all 0.4s ease';item.style.opacity='1';item.style.transform='translateY(0)';},i*250+300);});}
-setTimeout(animateTodos,800);setInterval(animateTodos,5000);
-detectRegion();
+var lang='en';
+var prices={m:{ap:'₺49.99',fp:'₺79.99',app:'/month · 7-day trial',fpp:'/month · 7-day trial',appT:'/ay · 7 günlük deneme',fppT:'/ay · 7 günlük deneme'},y:{ap:'₺499',fp:'₺799.99',app:'/year · 2 months free',fpp:'/year · 2 months free',appT:'/yıl · 2 ay ücretsiz',fppT:'/yıl · 2 ay ücretsiz'}};
+var cur='m';
+function setLang(l,btn){lang=l;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('[data-en]').forEach(el=>{var v=el.getAttribute('data-'+l);if(v)el.innerHTML=v;});refreshPrices();}
+function setPrice(p,btn){cur=p;document.querySelectorAll('.pt-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');refreshPrices();}
+function refreshPrices(){var d=prices[cur];document.getElementById('ap').textContent=d.ap;document.getElementById('fp').textContent=d.fp;document.getElementById('app').textContent=lang==='tr'?d.appT:d.app;document.getElementById('fpp').textContent=lang==='tr'?d.fppT:d.fpp;}
+var ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 </script>
 </body>
 </html>
