@@ -234,6 +234,13 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
   .foot-in{flex-direction:column}
 }
 @media(max-width:520px){.bento{grid-template-columns:1fr}.bc.wide{grid-column:span 1}}
+/* pricing tiers stack on phones (was cramped 3-up) */
+@media(max-width:760px){.tiers{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}}
+/* sticky mobile download bar — always-visible CTA for phone/ad traffic */
+.mobile-cta{display:none;position:fixed;left:14px;right:14px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:200;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:#fff!important;padding:15px 20px;border-radius:18px;font-weight:600;font-size:1.02rem;box-shadow:0 14px 34px -8px rgba(23,19,12,.5);border:1px solid rgba(255,255,255,.08)}
+.mobile-cta svg{width:18px;height:18px;fill:#fff}
+.mobile-cta:active{transform:scale(.98)}
+@media(max-width:760px){.mobile-cta{display:flex}body{padding-bottom:calc(86px + env(safe-area-inset-bottom))}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
@@ -247,7 +254,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
       <a href="#ipad">For iPad</a>
       <a href="#pricing">Pricing</a>
       <a href="#support">Support</a>
-      <a class="btn-store" href="https://apps.apple.com/tr/app/lunote-all-in-one-planner/id6774542509"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> App Store</a>
+      <a class="btn-store" href="https://apps.apple.com/app/id6774542509"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> App Store</a>
     </div>
   </div>
 </nav>
@@ -260,7 +267,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
       <h1>Your notes, your plans, your&nbsp;life — <em class="gtext">beautifully</em> organized.</h1>
       <p class="lead">AI-powered notes, Apple Pencil, tasks &amp; calendar, location reminders, a PDF &amp; EPUB library and more — in one calm, elegant app for iPhone, iPad and Apple&nbsp;Watch.</p>
       <div class="hero-cta">
-        <a class="btn-gold" href="https://apps.apple.com/tr/app/lunote-all-in-one-planner/id6774542509"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> Download on the App Store</a>
+        <a class="btn-gold" href="https://apps.apple.com/app/id6774542509"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> Download on the App Store</a>
         <a class="btn-ghost" href="#features">Explore features →</a>
       </div>
       <div class="trust"><span class="stars">★★★★★</span> <span>Loved by note-takers &amp; planners · 11 languages · Free to start</span></div>
@@ -440,7 +447,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
           <li><span class="ck">✓</span> Read PDFs, Office &amp; EPUBs</li>
           <li><span class="ck">✓</span> No account required</li>
         </ul>
-        <a class="tbtn out" href="https://apps.apple.com/tr/app/lunote-all-in-one-planner/id6774542509">Get started</a>
+        <a class="tbtn out" href="https://apps.apple.com/app/id6774542509">Get started</a>
       </div>
 
       <!-- Ajanda -->
@@ -456,7 +463,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
           <li><span class="ck">✓</span> Location reminders &amp; recurring tasks</li>
           <li><span class="ck">✓</span> Apple Calendar sync</li>
         </ul>
-        <a class="tbtn out" href="https://apps.apple.com/tr/app/lunote-all-in-one-planner/id6774542509">Choose Ajanda</a>
+        <a class="tbtn out" href="https://apps.apple.com/app/id6774542509">Choose Ajanda</a>
       </div>
 
       <!-- Full -->
@@ -474,7 +481,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
           <li><span class="ck">✓</span> Scientific calculator &amp; calorie tracker</li>
           <li><span class="ck">✓</span> Flashcards &amp; study stats</li>
         </ul>
-        <a class="tbtn solid" href="https://apps.apple.com/tr/app/lunote-all-in-one-planner/id6774542509"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> Get Full</a>
+        <a class="tbtn solid" href="https://apps.apple.com/app/id6774542509"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> Get Full</a>
       </div>
 
     </div>
@@ -507,7 +514,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
       <img class="logo" src="lunote-n15-1024x1024.png" alt="LuNote logo">
       <h2>Everything you plan, <span class="gtext">beautifully</span> in one place.</h2>
       <p>Download LuNote and bring your notes, tasks and days together — free to start.</p>
-      <a class="btn-gold" href="https://apps.apple.com/tr/app/lunote-all-in-one-planner/id6774542509"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> Download on the App Store</a>
+      <a class="btn-gold" href="https://apps.apple.com/app/id6774542509"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> Download on the App Store</a>
     </div>
   </div>
 </section>
@@ -519,7 +526,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
       <p>Your notes, your plans, your life — beautifully organized. For iPhone, iPad and Apple Watch.</p>
     </div>
     <div class="foot-cols">
-      <div class="fcol"><h4>Product</h4><a href="#features">Features</a><a href="#ipad">For iPad</a><a href="#pricing">Pricing</a><a href="https://apps.apple.com/tr/app/lunote-all-in-one-planner/id6774542509">Download</a></div>
+      <div class="fcol"><h4>Product</h4><a href="#features">Features</a><a href="#ipad">For iPad</a><a href="#pricing">Pricing</a><a href="https://apps.apple.com/app/id6774542509">Download</a></div>
       <div class="fcol"><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></div>
       <div class="fcol"><h4>Support</h4><a href="#support">Help &amp; FAQ</a><a href="mailto:support@lunote.app">support@lunote.app</a></div>
     </div>
@@ -593,5 +600,9 @@ if(stage&&window.matchMedia('(pointer:fine)').matches){
 // region name
 try{const loc=new Intl.Locale(navigator.language);const reg=loc.maximize().region;if(reg){const name=new Intl.DisplayNames([navigator.language||'en'],{type:'region'}).of(reg);if(name)document.getElementById('region-line').textContent=' — you appear to be in '+name;}}catch(e){}
 </script>
+<a class="mobile-cta" href="https://apps.apple.com/app/id6774542509" aria-label="Download LuNote on the App Store">
+  <svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+  <span>Download on the App Store</span>
+</a>
 </body>
 </html>
