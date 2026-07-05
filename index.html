@@ -37,7 +37,7 @@
   "installUrl":"https://apps.apple.com/app/id6774542509",
   "inLanguage":["en","tr"],
   "author":{"@type":"Organization","name":"Lu Apps","url":"https://www.lunote.app/"},
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free to start with optional Ajanda and Full subscriptions"},
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free to start with optional Planner (Ajanda) and Full subscriptions"},
   "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","ratingCount":"3","bestRating":"5"},
   "screenshot":"https://www.lunote.app/shots/iphone_01_home.png"
 }
@@ -454,7 +454,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
     <div class="grid-head reveal">
       <span class="kicker">Pricing</span>
       <h2>Choose your plan.</h2>
-      <p>Start free. Step up to <b>Ajanda</b> — the planner plan — or <b>Full</b> for everything, including AI. One subscription instead of five apps.</p>
+      <p>Start free. Step up to <b>Planner</b> or <b>Full</b> for everything, including AI. One subscription instead of five apps.</p>
     </div>
     <div style="text-align:center" class="reveal">
       <div class="toggle">
@@ -481,7 +481,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
 
       <!-- Ajanda -->
       <div class="tier">
-        <div class="tname">Ajanda</div>
+        <div class="tname">Planner</div>
         <div class="tdesc">A complete planner — tasks, projects &amp; calendar.</div>
         <div class="price gtext" id="pa">—</div>
         <div class="per" id="pra">per month</div>
@@ -492,7 +492,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
           <li><span class="ck">✓</span> Location reminders &amp; recurring tasks</li>
           <li><span class="ck">✓</span> Apple Calendar sync</li>
         </ul>
-        <a class="tbtn out" href="https://apps.apple.com/app/id6774542509">Choose Ajanda</a>
+        <a class="tbtn out" href="https://apps.apple.com/app/id6774542509">Choose Planner</a>
       </div>
 
       <!-- Full -->
@@ -503,7 +503,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
         <div class="price gtext" id="pf">—</div>
         <div class="per" id="prf">per month</div>
         <ul>
-          <li><span class="ck">✓</span> Everything in Ajanda</li>
+          <li><span class="ck">✓</span> Everything in Planner</li>
           <li><span class="ck">✓</span> All AI — chat, summarize, translate, slides, quiz</li>
           <li><span class="ck">✓</span> Voice &amp; meeting recorder + transcription</li>
           <li><span class="ck">✓</span> Document scanner &amp; OCR</li>
@@ -514,7 +514,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
       </div>
 
     </div>
-    <p class="price-note">Prices shown for your region<span id="region-line"></span> — the exact amount is always confirmed on the App Store. Cancel anytime from Settings.</p>
+    <p class="price-note">Prices shown for your region<span id="region-line"></span> — the exact amount is always confirmed on the App Store. Cancel anytime from Settings. The Planner plan appears as “Ajanda” on the App&nbsp;Store.</p>
   </div>
 </section>
 
@@ -643,8 +643,21 @@ if(stage&&window.matchMedia('(pointer:fine)').matches){
     stage.style.transform='translate('+(x*16)+'px,'+(y*14)+'px)';
   });
 }
-// region name
-try{const loc=new Intl.Locale(navigator.language);const reg=loc.maximize().region;if(reg){const name=new Intl.DisplayNames([navigator.language||'en'],{type:'region'}).of(reg);if(name)document.getElementById('region-line').textContent=' — you appear to be in '+name;}}catch(e){}
+// region name — fiyatla AYNI mantık (önce saat dilimi), yoksa tarayıcı dili.
+// (Eskiden yalnız tarayıcı dili kullanılıyordu: İstanbul'da en-US tarayıcı
+// "₺ fiyat + you appear to be in United States" tutarsızlığı üretiyordu.)
+try{
+  const tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||'';
+  const tzReg={'Europe/Istanbul':'TR','Europe/London':'GB','Asia/Tokyo':'JP','Asia/Kolkata':'IN','Asia/Calcutta':'IN','America/Sao_Paulo':'BR',
+    'Europe/Berlin':'DE','Europe/Paris':'FR','Europe/Madrid':'ES','Europe/Rome':'IT','Europe/Amsterdam':'NL','Europe/Dublin':'IE','Europe/Vienna':'AT','Europe/Brussels':'BE','Europe/Lisbon':'PT','Europe/Helsinki':'FI','Europe/Athens':'GR'};
+  let reg=tzReg[tz]||null;
+  if(!reg&&tz.indexOf('Australia/')===0)reg='AU';
+  if(!reg&&['America/Toronto','America/Vancouver','America/Edmonton','America/Winnipeg','America/Halifax','America/St_Johns','America/Regina'].indexOf(tz)>=0)reg='CA';
+  if(!reg&&tz.indexOf('America/')===0)reg='US';
+  if(!reg)reg=new Intl.Locale(navigator.language).maximize().region;
+  if(reg){const name=new Intl.DisplayNames([navigator.language||'en'],{type:'region'}).of(reg);
+    if(name)document.getElementById('region-line').textContent=' — you appear to be in '+name;}
+}catch(e){}
 </script>
 <a class="mobile-cta" href="https://apps.apple.com/app/id6774542509" aria-label="Download LuNote on the App Store">
   <svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
