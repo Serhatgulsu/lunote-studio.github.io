@@ -56,7 +56,22 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6;position:relative}
+body{font-family:'DM Sans',sans-serif;background:
+  radial-gradient(1100px 780px at 6% -8%, rgba(231,184,74,.24), transparent 56%),
+  radial-gradient(1050px 760px at 100% 2%, rgba(199,155,255,.17), transparent 55%),
+  radial-gradient(1250px 950px at 50% 118%, rgba(124,168,255,.15), transparent 55%),
+  radial-gradient(820px 620px at 90% 66%, rgba(127,224,168,.10), transparent 55%),
+  radial-gradient(700px 700px at 12% 60%, rgba(255,160,180,.07), transparent 55%),
+  var(--cream);
+  background-attachment:fixed;color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6;position:relative}
+/* animated aurora behind everything */
+body:before{content:"";position:fixed;inset:-15%;z-index:-1;pointer-events:none;
+  background:
+   radial-gradient(560px 560px at 22% 28%, rgba(231,184,74,.20), transparent 60%),
+   radial-gradient(520px 520px at 82% 18%, rgba(199,155,255,.18), transparent 60%),
+   radial-gradient(640px 640px at 68% 82%, rgba(124,168,255,.16), transparent 60%);
+  filter:blur(20px);animation:aurora 24s ease-in-out infinite alternate}
+@keyframes aurora{0%{transform:translate3d(0,0,0) scale(1) rotate(0deg)}50%{transform:translate3d(2.5%,-2%,0) scale(1.1) rotate(4deg)}100%{transform:translate3d(-2%,2.5%,0) scale(1.05) rotate(-3deg)}}
 /* grain */
 body:after{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.04;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 a{text-decoration:none;color:inherit}
@@ -100,9 +115,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,242,233,
 
 /* hero */
 .hero{padding:160px 0 96px;position:relative;overflow:hidden}
-.hero .blob.b1{width:560px;height:560px;background:var(--gold2);top:-120px;right:-60px;opacity:.34;animation:drift 14s ease-in-out infinite}
-.hero .blob.b2{width:440px;height:440px;background:var(--purple);bottom:-160px;left:-120px;opacity:.22;animation:drift 17s ease-in-out infinite reverse}
-.hero .blob.b3{width:340px;height:340px;background:var(--blue);top:40%;right:38%;opacity:.14;animation:drift 20s ease-in-out infinite}
+.hero .blob.b1{width:640px;height:640px;background:var(--gold2);top:-140px;right:-80px;opacity:.42;animation:drift 14s ease-in-out infinite}
+.hero .blob.b2{width:520px;height:520px;background:var(--purple);bottom:-180px;left:-140px;opacity:.30;animation:drift 17s ease-in-out infinite reverse}
+.hero .blob.b3{width:400px;height:400px;background:var(--blue);top:38%;right:36%;opacity:.20;animation:drift 20s ease-in-out infinite}
 @keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.12)}}
 .hero-in{display:flex;align-items:center;gap:40px}
 .hero-left{flex:1;max-width:560px}
@@ -114,8 +129,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,242,233,
 .trust{display:flex;align-items:center;gap:14px;margin-top:26px;font-size:.86rem;color:var(--muted)}
 .stars{color:var(--gold2);letter-spacing:2px;font-size:1rem}
 
-.hero-right{flex:0 0 auto;position:relative;width:460px;height:520px}
-.hero-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.hero-right{flex:0 0 auto;position:relative;width:460px;height:520px;perspective:1300px}
+.hero-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform-style:preserve-3d;transition:transform .25s ease-out;will-change:transform}
+.hero-stage:before{content:"";position:absolute;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(231,184,74,.32),rgba(199,155,255,.16) 46%,transparent 70%);filter:blur(34px);z-index:0;animation:pulse 9s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.12);opacity:1}}
 .hero-pad{position:absolute;width:360px;right:-10px;top:20px;transform:rotate(6deg);opacity:.96;animation:floaty 7s ease-in-out infinite}
 .hero-phone{position:absolute;width:236px;left:0;top:70px;transform:rotate(-4deg);z-index:3;animation:floaty 6s ease-in-out infinite .5s}
 @keyframes floaty{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-16px) rotate(var(--r,0deg))}}
@@ -665,6 +682,18 @@ try{
   <svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
   <span>Download on the App Store</span>
 </a>
+<script>
+/* hero 3D parallax — devices tilt with cursor */
+(function(){var hr=document.querySelector('.hero-right'),st=document.querySelector('.hero-stage');if(!hr||!st)return;
+if(window.matchMedia&&window.matchMedia('(pointer:fine)').matches){
+  hr.addEventListener('mousemove',function(e){var r=hr.getBoundingClientRect();var x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;st.style.transform='rotateY('+(x*18)+'deg) rotateX('+(-y*16)+'deg)';});
+  hr.addEventListener('mouseleave',function(){st.style.transform='rotateY(0) rotateX(0)';});
+}
+/* subtle whole-hero parallax on scroll */
+var hero=document.querySelector('.hero');
+window.addEventListener('scroll',function(){if(!hero)return;var s=window.scrollY;var b=hero.querySelectorAll('.blob');b.forEach(function(el,i){el.style.transform='translateY('+(s*(0.06+i*0.03))+'px)';});},{passive:true});
+})();
+</script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a9740c4e65664077a528c513180ce24d"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
