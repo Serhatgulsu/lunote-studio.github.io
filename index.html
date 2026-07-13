@@ -42,6 +42,16 @@
   "screenshot":"https://www.lunote.app/shots/iphone_01_home.png"
 }
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is LuNote free?","acceptedAnswer":{"@type":"Answer","text":"Yes — LuNote is free to start with no account required. Optional Planner and Full subscriptions unlock tasks, calendar and all AI features."}},
+{"@type":"Question","name":"Does LuNote work with Apple Pencil?","acceptedAnswer":{"@type":"Answer","text":"Yes. LuNote offers true Apple Pencil handwriting on iPad, with one-tap handwriting-to-text, summaries and flashcards."}},
+{"@type":"Question","name":"Can I import from GoodNotes or Notability?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can bring your GoodNotes and Notability libraries into LuNote from Google Drive, iCloud or Files in minutes."}},
+{"@type":"Question","name":"What does the Full plan include?","acceptedAnswer":{"@type":"Answer","text":"Full unlocks all AI — chat with notes, summarize, translate — plus voice recording with transcription, scanner and OCR, a scientific calculator, flashcards and a calorie tracker."}},
+{"@type":"Question","name":"Which devices are supported?","acceptedAnswer":{"@type":"Answer","text":"LuNote works on iPhone, iPad and Apple Watch, synced securely with iCloud, and is available in 11 languages."}}
+]}
+</script>
+<link rel="preload" as="image" href="shots/iphone_01_home.png" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
@@ -54,12 +64,12 @@
   --blue:#7CA8FF; --purple:#C79BFF; --green:#7FE0A8; --pink:#FFA0B4; --appstore:#000;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'DM Sans',sans-serif;color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative;
   background:radial-gradient(1100px 780px at 6% -8%,rgba(231,184,74,.20),transparent 56%),radial-gradient(1050px 760px at 100% 2%,rgba(199,155,255,.14),transparent 55%),radial-gradient(1250px 950px at 50% 118%,rgba(124,168,255,.13),transparent 55%),var(--cream);background-attachment:fixed}
 a{text-decoration:none;color:inherit}
 img{max-width:100%;display:block}
-h1,h2,h3{font-family:'Playfair Display',serif;letter-spacing:-.02em;line-height:1.07}
+h1,h2,h3{font-family:'Playfair Display',serif;letter-spacing:-.02em;line-height:1.07;overflow-wrap:break-word}
 .wrap{max-width:1180px;margin:0 auto;padding:0 26px;position:relative;z-index:2}
 .gt{background:linear-gradient(120deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-style:italic}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);background:var(--paper);border:1px solid var(--line);padding:8px 16px;border-radius:22px}
@@ -201,6 +211,14 @@ footer{margin-top:80px;padding:56px 0 40px;border-top:1px solid var(--line)}
 .foot-col a{display:block;font-size:.94rem;color:var(--sub);margin-bottom:9px;transition:color .2s}
 .foot-col a:hover{color:var(--gold)}
 .foot-bot{border-top:1px solid var(--line);padding-top:22px;font-size:.82rem;color:var(--muted);text-align:center}
+/* faq */
+.faq{max-width:760px;margin:0 auto}
+.faq details{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:2px 22px;margin-bottom:12px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:600;font-size:1.02rem;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--gold);font-size:1.5rem;font-weight:400;line-height:1;flex:0 0 auto}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--sub);font-size:.96rem;padding:0 0 18px}
 /* reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
 .reveal.in{opacity:1;transform:none}
@@ -253,7 +271,7 @@ footer{margin-top:80px;padding:56px 0 40px;border-top:1px solid var(--line)}
   </div>
   <div class="hero-stage reveal in">
     <span class="glow"></span>
-    <img class="device phone" src="shots/iphone_01_home.png" alt="LuNote home screen on iPhone" loading="eager" width="300" height="650">
+    <img class="device phone" src="shots/iphone_01_home.png" alt="LuNote home screen on iPhone" loading="eager" fetchpriority="high" width="300" height="650">
     <div class="fchip c1"><span>✨</span> Summarized in seconds</div>
     <div class="fchip c2"><span>📍</span> Location reminder set</div>
     <div class="fchip c3"><span>🎙️</span> Meeting transcribed</div>
@@ -393,6 +411,18 @@ footer{margin-top:80px;padding:56px 0 40px;border-top:1px solid var(--line)}
     </div>
   </div>
   <p class="price-note">Prices shown for your region<span id="region-line"></span> — the exact amount is always confirmed on the App Store. The Planner plan appears as “Ajanda” on the App&nbsp;Store.</p>
+</div></section>
+
+<!-- FAQ -->
+<section class="sec"><div class="wrap">
+  <div class="sec-head reveal"><span class="eyebrow">FAQ</span><h2>Good to know.</h2></div>
+  <div class="faq reveal">
+    <details><summary>Is LuNote free?</summary><p>Yes — free to start with no account required. Optional Planner and Full subscriptions unlock tasks, calendar and all AI features.</p></details>
+    <details><summary>Does LuNote work with Apple Pencil?</summary><p>Yes. True Apple Pencil handwriting on iPad, with one-tap handwriting-to-text, summaries and flashcards.</p></details>
+    <details><summary>Can I import from GoodNotes or Notability?</summary><p>Yes. Bring your GoodNotes and Notability libraries into LuNote from Google Drive, iCloud or Files — in minutes.</p></details>
+    <details><summary>What does the Full plan include?</summary><p>All AI — chat, summarize, translate — plus voice recording with transcription, scanner and OCR, a scientific calculator, flashcards and a calorie tracker.</p></details>
+    <details><summary>Which devices are supported?</summary><p>iPhone, iPad and Apple Watch — synced securely with iCloud, in 11 languages.</p></details>
+  </div>
 </div></section>
 
 <!-- FINAL CTA -->
