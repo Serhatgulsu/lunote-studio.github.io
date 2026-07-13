@@ -72,6 +72,18 @@ body:before{content:"";position:fixed;inset:-15%;z-index:-1;pointer-events:none;
    radial-gradient(640px 640px at 68% 82%, rgba(124,168,255,.16), transparent 60%);
   filter:blur(20px);animation:aurora 24s ease-in-out infinite alternate}
 @keyframes aurora{0%{transform:translate3d(0,0,0) scale(1) rotate(0deg)}50%{transform:translate3d(2.5%,-2%,0) scale(1.1) rotate(4deg)}100%{transform:translate3d(-2%,2.5%,0) scale(1.05) rotate(-3deg)}}
+/* flowing "water" liquid background */
+.liquid{position:fixed;inset:-8%;z-index:-1;pointer-events:none;overflow:hidden;filter:blur(46px);opacity:.55}
+.liquid span{position:absolute;display:block;will-change:transform,border-radius}
+.liquid .l1{width:46vw;height:46vw;left:-10vw;top:-10vw;opacity:.34;background:radial-gradient(circle at 38% 38%,var(--gold2),transparent 68%);animation:flowA 40s ease-in-out infinite}
+.liquid .l2{width:42vw;height:42vw;right:-12vw;top:-4vw;opacity:.2;background:radial-gradient(circle at 60% 42%,var(--purple),transparent 70%);animation:flowB 50s ease-in-out infinite}
+.liquid .l3{width:52vw;height:52vw;left:16vw;bottom:-24vw;opacity:.18;background:radial-gradient(circle at 50% 50%,var(--blue),transparent 70%);animation:flowC 46s ease-in-out infinite}
+.liquid .l4{width:34vw;height:34vw;right:10vw;bottom:2vw;opacity:.14;background:radial-gradient(circle at 42% 58%,var(--green),transparent 70%);animation:flowA 56s ease-in-out infinite reverse}
+.liquid .l5{width:30vw;height:30vw;left:34vw;top:26vh;opacity:.12;background:radial-gradient(circle at 50% 50%,var(--gold2),transparent 70%);animation:flowB 64s ease-in-out infinite}
+@keyframes flowA{0%,100%{transform:translate(0,0) scale(1) rotate(0deg);border-radius:42% 58% 63% 37%/41% 44% 56% 59%}33%{transform:translate(6vw,4vh) scale(1.14) rotate(9deg);border-radius:60% 40% 42% 58%/55% 48% 52% 45%}66%{transform:translate(-4vw,-3vh) scale(.95) rotate(-7deg);border-radius:36% 64% 55% 45%/62% 36% 64% 38%}}
+@keyframes flowB{0%,100%{transform:translate(0,0) scale(1) rotate(0deg);border-radius:55% 45% 48% 52%/52% 55% 45% 48%}33%{transform:translate(-5vw,5vh) scale(.92) rotate(-8deg);border-radius:38% 62% 60% 40%/45% 40% 60% 55%}66%{transform:translate(5vw,-4vh) scale(1.12) rotate(6deg);border-radius:63% 37% 40% 60%/58% 62% 38% 42%}}
+@keyframes flowC{0%,100%{transform:translate(0,0) scale(1.04) rotate(0deg);border-radius:48% 52% 55% 45%/45% 48% 52% 55%}50%{transform:translate(4vw,-5vh) scale(.9) rotate(7deg);border-radius:60% 40% 45% 55%/58% 45% 55% 42%}}
+@media(max-width:760px){.liquid{filter:blur(34px);opacity:.5}.liquid .l4,.liquid .l5{display:none}}
 /* grain */
 body:after{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.04;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 a{text-decoration:none;color:inherit}
@@ -291,6 +303,7 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
 </style>
 </head>
 <body>
+<div class="liquid" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span><span class="l5"></span></div>
 
 <nav>
   <div class="nav-in">
@@ -589,18 +602,18 @@ footer{background:var(--cream2);border-top:1px solid var(--line);padding:58px 0 
 const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 // localized pricing (region → currency; falls back to USD)
-// Fiyatlar 6 Tem 2026 App Store güncellemesiyle eşleşir. TR değişmedi; Ajanda aylık değişmedi.
+// Fiyatlar 15 Tem 2026 App Store güncellemesiyle eşleşir (global kademeli yeniden fiyatlama).
 // am=Ajanda/ay, ay=Ajanda/yıl, fm=Full/ay, fy=Full/yıl.
 const PRICES={
-  USD:{s:'$',am:'3.99',ay:'29.99',fm:'9.99',fy:'59.99'},
-  TRY:{s:'₺',am:'49.99',ay:'499.99',fm:'79.99',fy:'799.99'},
-  EUR:{s:'€',am:'3.99',ay:'34.99',fm:'9.99',fy:'69.99'},
-  GBP:{s:'£',am:'3.99',ay:'29.99',fm:'9.99',fy:'59.99'},
-  AUD:{s:'A$',am:'5.99',ay:'49.99',fm:'14.99',fy:'99.99'},
-  CAD:{s:'C$',am:'4.99',ay:'39.99',fm:'12.99',fy:'79.99'},
-  JPY:{s:'¥',am:'600',ay:'5000',fm:'1500',fy:'10000'},
-  INR:{s:'₹',am:'399',ay:'2999',fm:'999',fy:'5900'},
-  BRL:{s:'R$',am:'24,90',ay:'199,90',fm:'59,90',fy:'399,90'}
+  USD:{s:'$',am:'4.99',ay:'29.99',fm:'7.99',fy:'49.99'},
+  TRY:{s:'₺',am:'99.99',ay:'699.99',fm:'199.99',fy:'999.99'},
+  EUR:{s:'€',am:'5.99',ay:'34.99',fm:'8.99',fy:'59.99'},
+  GBP:{s:'£',am:'4.99',ay:'29.99',fm:'7.99',fy:'49.99'},
+  AUD:{s:'A$',am:'7.99',ay:'49.99',fm:'12.99',fy:'79.99'},
+  CAD:{s:'C$',am:'6.99',ay:'39.99',fm:'9.99',fy:'69.99'},
+  JPY:{s:'¥',am:'800',ay:'5000',fm:'1300',fy:'8000'},
+  INR:{s:'₹',am:'99',ay:'999',fm:'299',fy:'1999'},
+  BRL:{s:'R$',am:'12,90',ay:'49,90',fm:'24,90',fy:'129,90'}
 };
 function curForRegion(){
   try{
