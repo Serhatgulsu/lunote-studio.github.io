@@ -254,8 +254,8 @@
       </div>
       <div class="plan pop">
         <div class="tier">Full · Premium</div>
-        <div class="price">$59.99<span style="font-size:18px;color:var(--mut)">/yr</span> <span style="font-size:13px;color:var(--mut);font-family:var(--sans);font-weight:700;vertical-align:middle">US</span></div>
-        <div class="per">🌍 Localized price in every country · 7 days free · monthly also available</div>
+        <div class="price"><span id="p-fy">$49.99</span><span style="font-size:18px;color:var(--mut)">/yr</span></div>
+        <div class="per">🌍 <span id="p-cc">USD</span> · <span id="p-fm">$7.99</span>/mo · 7 days free</div>
         <ul>
           <li>Unlimited notes</li>
           <li>AI writing &amp; summaries</li>
@@ -266,12 +266,12 @@
           <li>PDF &amp; EPUB library</li>
         </ul>
         <a class="btn btn-gold" href="https://apps.apple.com/app/id6774542509" style="justify-content:center">Start 7-day free trial</a>
-        <div class="note">$59.99 is the US price — every country has its own local price. The App Store always shows yours.</div>
+        <div class="note">Prices shown for your region. Your exact local price always appears in the App Store.</div>
       </div>
       <div class="plan">
         <div class="tier">Planner</div>
-        <div class="price" style="font-size:27px">Tasks &amp; calendar</div>
-        <div class="per">a step up from Free · price in the App Store</div>
+        <div class="price"><span id="p-ay">$29.99</span><span style="font-size:18px;color:var(--mut)">/yr</span></div>
+        <div class="per"><span id="p-am">$4.99</span>/mo · tasks &amp; calendar</div>
         <ul>
           <li>Everything in Free</li>
           <li>Tasks &amp; to-do lists</li>
@@ -303,5 +303,42 @@
       <a href="https://apps.apple.com/app/id6774542509">App Store</a>
     </div>
   </div></div></footer>
+
+  <script>
+  /* Localized pricing — shows the visitor's regional price (Planner + Full).
+     am=Planner monthly, ay=Planner yearly, fm=Full monthly, fy=Full yearly.
+     Detects country from locale, then timezone as a fallback. Defaults to USD. */
+  (function(){
+    var P={
+      USD:{s:'$', am:'4.99', ay:'29.99', fm:'7.99',  fy:'49.99'},
+      EUR:{s:'€', am:'5.99', ay:'34.99', fm:'8.99',  fy:'59.99'},
+      GBP:{s:'£', am:'4.99', ay:'29.99', fm:'7.99',  fy:'49.99'},
+      CAD:{s:'C$',am:'6.99', ay:'39.99', fm:'9.99',  fy:'69.99'},
+      AUD:{s:'A$',am:'7.99', ay:'49.99', fm:'12.99', fy:'79.99'},
+      BRL:{s:'R$',am:'12,90',ay:'49,90', fm:'24,90', fy:'129,90'},
+      INR:{s:'₹', am:'99',   ay:'999',   fm:'299',   fy:'1999'},
+      JPY:{s:'¥', am:'800',  ay:'5000',  fm:'1300',  fy:'8000'},
+      TRY:{s:'₺', am:'99.99',ay:'699.99',fm:'199.99',fy:'999.99'}
+    };
+    var C2C={US:'USD',TR:'TRY',GB:'GBP',AU:'AUD',CA:'CAD',IN:'INR',JP:'JPY',BR:'BRL',
+      DE:'EUR',FR:'EUR',ES:'EUR',IT:'EUR',NL:'EUR',IE:'EUR',AT:'EUR',BE:'EUR',PT:'EUR',FI:'EUR',GR:'EUR',LU:'EUR'};
+    function detect(){
+      try{
+        var loc=(navigator.language||navigator.userLanguage||'en-US').toUpperCase().split('-');
+        var c=loc[1]||loc[0];
+        if(C2C[c])return c;
+        var tz=(Intl.DateTimeFormat().resolvedOptions().timeZone||'');
+        var T=[[/Istanbul/,'TR'],[/London/,'GB'],[/Tokyo/,'JP'],[/Kolkata|Calcutta/,'IN'],
+               [/Sao_Paulo/,'BR'],[/Sydney|Melbourne|Brisbane|Perth/,'AU'],[/Toronto|Vancouver|Edmonton/,'CA'],
+               [/Paris|Berlin|Madrid|Rome|Amsterdam|Dublin|Vienna|Brussels|Lisbon|Helsinki|Athens/,'DE']];
+        for(var i=0;i<T.length;i++){if(T[i][0].test(tz))return T[i][1];}
+        return c;
+      }catch(e){return 'US';}
+    }
+    var cur=C2C[detect()]||'USD', p=P[cur]||P.USD;
+    function set(id,v){var el=document.getElementById(id); if(el) el.textContent=v;}
+    set('p-fy',p.s+p.fy); set('p-fm',p.s+p.fm); set('p-ay',p.s+p.ay); set('p-am',p.s+p.am); set('p-cc',cur);
+  })();
+  </script>
 </body>
 </html>
