@@ -323,17 +323,32 @@
     var C2C={US:'USD',TR:'TRY',GB:'GBP',AU:'AUD',CA:'CAD',IN:'INR',JP:'JPY',BR:'BRL',
       DE:'EUR',FR:'EUR',ES:'EUR',IT:'EUR',NL:'EUR',IE:'EUR',AT:'EUR',BE:'EUR',PT:'EUR',FI:'EUR',GR:'EUR',LU:'EUR'};
     function detect(){
+      /* Physical location first (timezone) — NOT browser language, so an English
+         browser in Turkey still gets ₺. Language is only a last resort. */
+      try{
+        var tz=(Intl.DateTimeFormat().resolvedOptions().timeZone||'');
+        var T=[
+          [/Istanbul/,'TR'],
+          [/London/,'GB'],
+          [/(Kolkata|Calcutta)/,'IN'],
+          [/Tokyo/,'JP'],
+          [/(Sao_Paulo|Fortaleza|Bahia|Recife|Manaus|Cuiaba|Belem|Araguaina)/,'BR'],
+          [/^Australia\//,'AU'],
+          [/(Toronto|Vancouver|Edmonton|Winnipeg|Halifax|Regina|Moncton|St_Johns)/,'CA'],
+          [/America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Indiana|Kentucky|Menominee|Adak|Sitka|Juneau|Honolulu|Nome)/,'US'],
+          [/(Dublin|Lisbon|Madrid|Paris|Berlin|Rome|Amsterdam|Brussels|Vienna|Helsinki|Athens|Luxembourg|Prague|Warsaw|Budapest|Zurich|Copenhagen|Stockholm|Oslo|Riga|Tallinn|Vilnius|Bratislava|Ljubljana|Zagreb|Malta|Nicosia|Sofia|Bucharest|Belgrade)/,'DE']
+        ];
+        for(var i=0;i<T.length;i++){ if(T[i][0].test(tz)) return T[i][1]; }
+        if(/^Europe\//.test(tz)) return 'DE';     // EUR default across Europe
+        if(/^Australia\//.test(tz)) return 'AU';
+      }catch(e){}
+      /* last resort: browser language */
       try{
         var loc=(navigator.language||navigator.userLanguage||'en-US').toUpperCase().split('-');
         var c=loc[1]||loc[0];
-        if(C2C[c])return c;
-        var tz=(Intl.DateTimeFormat().resolvedOptions().timeZone||'');
-        var T=[[/Istanbul/,'TR'],[/London/,'GB'],[/Tokyo/,'JP'],[/Kolkata|Calcutta/,'IN'],
-               [/Sao_Paulo/,'BR'],[/Sydney|Melbourne|Brisbane|Perth/,'AU'],[/Toronto|Vancouver|Edmonton/,'CA'],
-               [/Paris|Berlin|Madrid|Rome|Amsterdam|Dublin|Vienna|Brussels|Lisbon|Helsinki|Athens/,'DE']];
-        for(var i=0;i<T.length;i++){if(T[i][0].test(tz))return T[i][1];}
-        return c;
-      }catch(e){return 'US';}
+        if(C2C[c]) return c;
+      }catch(e){}
+      return 'US';
     }
     var cur=C2C[detect()]||'USD', p=P[cur]||P.USD;
     function set(id,v){var el=document.getElementById(id); if(el) el.textContent=v;}
